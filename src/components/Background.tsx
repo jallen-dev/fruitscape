@@ -4,7 +4,7 @@ import { BaseTexture } from "@pixi/core";
 import { Spritesheet } from "@pixi/spritesheet";
 import { Container } from "@pixi/react";
 import data from "../atlas/background.json";
-import { background } from "../maps";
+import { background, objects } from "../maps";
 
 import { SCALE_MODES } from "@pixi/constants";
 import { TileMap } from "./TileMap";
@@ -24,6 +24,7 @@ export function Background() {
   return (
     <Container scale={2}>
       <TileMap tiles={background} tileNames={tileNames} />
+      <TileMap tiles={objects} tileNames={tileNames} />
     </Container>
   );
 }
