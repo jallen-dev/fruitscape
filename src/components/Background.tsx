@@ -23,8 +23,7 @@ export function Background() {
 
   return (
     <Container scale={2}>
-      <TileMap tiles={background} tileNames={tileNames} />
-      <TileMap tiles={objects} tileNames={tileNames} />
+      <TileMap layers={[background, objects]} tileNames={tileNames} />
     </Container>
   );
 }

@@ -1,7 +1,7 @@
 const WIDTH = 40;
 const HEIGHT = 20;
 
-type TileMapData = (number | undefined)[][];
+export type TileMapData = (number | undefined)[][];
 
 export const background: TileMapData = Array.from({ length: HEIGHT }, () => Array.from({ length: WIDTH }, () => 0));
 
