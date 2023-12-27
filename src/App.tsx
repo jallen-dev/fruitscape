@@ -1,10 +1,10 @@
 import "./App.css";
-import { Container, Sprite, Stage, useApp } from "@pixi/react";
+import { Container, PixiRef, Sprite, Stage, useApp } from "@pixi/react";
 import { Texture } from "@pixi/core";
 import "@pixi/events";
 
 import { Background } from "./components/Background";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 function App() {
   return (
@@ -17,7 +17,10 @@ function App() {
 
 export default App;
 
+type IContainer = PixiRef<typeof Container>;
+
 function ScrollingBackground() {
+  const containerRef = useRef<IContainer>(null);
   const [coords, setCoords] = useState([0, 0]);
   const app = useApp();
   const width = app.screen.width;
