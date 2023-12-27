@@ -1,7 +1,10 @@
 import "./App.css";
 import { Container, Sprite, Stage, useApp } from "@pixi/react";
+import { Texture } from "@pixi/core";
+import "@pixi/events";
 
 import { Background } from "./components/Background";
+import { useState } from "react";
 
 function App() {
   return (
@@ -15,18 +18,28 @@ function App() {
 export default App;
 
 function ScrollingBackground() {
+  const [coords, setCoords] = useState([0, 0]);
   const app = useApp();
   const width = app.screen.width;
   const height = app.screen.height;
+
+  const [x, y] = coords;
   return (
-    <Container
-      x={-50}
-      pointerdown={(event) => {
-        console.log(event);
-      }}
-    >
-      <Background />
-      {/* <Sprite texture={Texture.WHITE} width={500} height={500} /> */}
-    </Container>
+    <>
+      <Container x={x} y={y}>
+        <Background />
+      </Container>
+      <Sprite
+        texture={Texture.EMPTY}
+        width={width}
+        height={height}
+        interactive={true}
+        pointerdown={(event) => {
+          console.log(event);
+          const nextCoords = [x - (event.screen.x - width / 2), y - (event.screen.y - height / 2)];
+          setCoords(nextCoords);
+        }}
+      />
+    </>
   );
 }

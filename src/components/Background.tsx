@@ -1,12 +1,12 @@
-import { CompositeTilemap, Tilemap } from "@pixi/tilemap";
+import { CompositeTilemap } from "@pixi/tilemap";
 import { Assets } from "@pixi/assets";
 import { useEffect, useRef, useState } from "react";
-import { Rectangle, Texture, BaseTexture } from "@pixi/core";
+import { BaseTexture } from "@pixi/core";
 import { Spritesheet } from "@pixi/spritesheet";
 import { Container, PixiComponent, PixiRef, _ReactPixi } from "@pixi/react";
-import { Sprite } from "@pixi/sprite";
 import data from "../atlas/background.json";
 import { background } from "../maps";
+import { DisplayObject } from "pixi.js";
 
 type IContainer = PixiRef<typeof Container>;
 
@@ -46,7 +46,13 @@ async function load() {
   return await sheet.parse();
 }
 
-const TileMap = PixiComponent("TileMap", {
+type TileMapProps = {
+  tiles: number[][];
+  tileNames: string[];
+  tileWidth?: number;
+};
+
+const TileMap = PixiComponent<TileMapProps, DisplayObject>("TileMap", {
   create({ tiles, tileNames, tileWidth = 16 }) {
     const tilemap = new CompositeTilemap();
     for (let y = 0; y < tiles.length; y++) {
@@ -55,9 +61,10 @@ const TileMap = PixiComponent("TileMap", {
       }
     }
 
-    return tilemap;
+    return tilemap as any;
   },
-  applyProps(instance, oldProps, newProps) {
+  // @ts-ignore DisplayObject not assignable to CompositeTilemap
+  applyProps(instance: CompositeTilemap, oldProps, newProps) {
     const { tiles, tileNames, tileWidth = 16 } = newProps;
 
     instance.clear();
