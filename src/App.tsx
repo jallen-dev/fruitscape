@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Container, Sprite, Stage, useApp } from "@pixi/react";
+
+import { Background } from "./components/Background";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Stage>
+      <ScrollingBackground />
+      <Sprite image="https://pixijs.io/pixi-react/img/bunny.png" x={400} y={270} anchor={{ x: 0.5, y: 0.5 }} />
+    </Stage>
   );
 }
 
 export default App;
+
+function ScrollingBackground() {
+  const app = useApp();
+  const width = app.screen.width;
+  const height = app.screen.height;
+  return (
+    <Container
+      x={-50}
+      pointerdown={(event) => {
+        console.log(event);
+      }}
+    >
+      <Background />
+      {/* <Sprite texture={Texture.WHITE} width={500} height={500} /> */}
+    </Container>
+  );
+}
