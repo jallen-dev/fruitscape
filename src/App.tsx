@@ -34,14 +34,10 @@ function App() {
 
   const player = game.players.find((p) => p.playerId === playerId);
 
-  if (!player) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <Stage>
       <ScrollingBackground />
-      <Character character={player.character} />
+      {player && <Character character={player.character} />}
     </Stage>
   );
 }
