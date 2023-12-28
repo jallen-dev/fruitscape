@@ -8,7 +8,6 @@ import { load } from "./loadAssets.ts";
 import { useStore } from "./store.ts";
 
 function App() {
-  const setTileNames = useStore((state) => state.setTileNames);
   const game = useStore((state) => state.game);
   const playerId = useStore((state) => state.yourPlayerId);
   const setGame = useStore((state) => state.setGame);
@@ -24,7 +23,8 @@ function App() {
     });
 
     load().then((sheet) => {
-      setTileNames(Object.keys(sheet));
+      useStore.getState().setTileNames(Object.keys(sheet));
+      useStore.getState().setLoaded(true);
     });
   }, []);
 
