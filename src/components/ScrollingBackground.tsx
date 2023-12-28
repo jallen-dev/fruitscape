@@ -12,8 +12,9 @@ type IContainer = PixiRef<typeof Container>;
 export function ScrollingBackground() {
   const containerRef = useRef<IContainer>(null);
   const [coords, setCoords] = useState([0, 0]);
-  const players = useStore((state) => state.players);
+  const game = useStore((state) => state.game);
   const yourPlayerId = useStore((state) => state.yourPlayerId);
+
   const app = useApp();
   app.resizeTo = window;
   const width = app.screen.width;
@@ -21,7 +22,7 @@ export function ScrollingBackground() {
 
   console.log({ width, height });
 
-  const otherPlayers = players.filter((p) => p.playerId !== yourPlayerId);
+  const otherPlayers = game?.players.filter((p) => p.playerId !== yourPlayerId) ?? [];
 
   const [x, y] = coords;
   return (

@@ -8,18 +8,18 @@ import { load } from "./loadAssets.ts";
 import { useStore } from "./store.ts";
 
 function App() {
-  const [game, setGame] = useState<GameState>();
-  const [playerId, setPlayerId] = useState<string>();
   const setTileNames = useStore((state) => state.setTileNames);
-  const setPlayers = useStore((state) => state.setPlayers);
-  console.log({ game });
+  const game = useStore((state) => state.game);
+  const playerId = useStore((state) => state.yourPlayerId);
+  const setGame = useStore((state) => state.setGame);
+  const setYourPlayerId = useStore((state) => state.setYourPlayerId);
 
   useEffect(() => {
     Rune.initClient({
       onChange: ({ game, yourPlayerId }) => {
+        console.log({ game });
         setGame(game);
-        setPlayers(game.players);
-        setPlayerId(yourPlayerId);
+        setYourPlayerId(yourPlayerId ?? "");
       },
     });
 
