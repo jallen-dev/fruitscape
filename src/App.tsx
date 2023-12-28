@@ -5,6 +5,7 @@ import { ScrollingBackground } from "./components/ScrollingBackground.tsx";
 import { load } from "./loadAssets.ts";
 import { useStore } from "./store.ts";
 import { Player } from "./components/Player.tsx";
+import { Trade } from "./components/Trade.tsx";
 
 function App() {
   const game = useStore((state) => state.game);
@@ -33,8 +34,12 @@ function App() {
       (state) => state.game?.players[playerId],
       (player) => {
         if (player && player.location.x === player.destination.x && player.location.y === player.destination.y) {
-          console.log("Player arrived at destination");
-          // TODO: check if player is on a npc
+          for (const npc of useStore.getState().game?.npcs ?? []) {
+            if (npc.location.x === player.location.x && npc.location.y === player.location.y) {
+              useStore.getState().setTradeOpen(true);
+              return;
+            }
+          }
         }
       }
     );
@@ -47,10 +52,13 @@ function App() {
   }
 
   return (
-    <Stage>
-      <ScrollingBackground />
-      <Player />
-    </Stage>
+    <div>
+      <Stage>
+        <ScrollingBackground />
+        <Player />
+      </Stage>
+      <Trade />
+    </div>
   );
 }
 

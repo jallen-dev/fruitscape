@@ -10,6 +10,7 @@ interface State {
   yourPlayerId: string;
   destination?: { x: number; y: number };
   loaded: boolean;
+  tradeOpen: boolean;
 }
 
 interface Actions {
@@ -19,17 +20,20 @@ interface Actions {
   setYourPlayerId: (yourPlayerId: string) => void;
   setLoaded: (loaded: boolean) => void;
   setDestination: (destination: { x: number; y: number }) => void;
+  setTradeOpen: (tradeOpen: boolean) => void;
 }
 
 export const useStore = create<State & Actions>()(
   subscribeWithSelector((set) => ({
     yourPlayerId: "",
     loaded: false,
+    tradeOpen: false,
     setTileNames: (tileNames) => set({ tileNames }),
     setGame: (game) => set({ game }),
     setPlayers: (players) => set({ players }),
     setYourPlayerId: (yourPlayerId) => set({ yourPlayerId }),
     setLoaded: (loaded) => set({ loaded }),
     setDestination: (destination) => set({ destination }),
+    setTradeOpen: (tradeOpen) => set({ tradeOpen }),
   }))
 );
