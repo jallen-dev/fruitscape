@@ -3,13 +3,19 @@ import { useStore } from "../store";
 
 export function LocationMarker({ location }: { location?: { x: number; y: number } }) {
   const loaded = useStore((state) => state.loaded);
+  const destination = useStore((state) => state.destination);
 
-  if (!loaded) {
+  if (!loaded || !destination) {
     return null;
   }
 
-  const x = location ? location.x * 32 : 0;
-  const y = location ? location.y * 32 : 0;
-
-  return <Sprite image="set2/tile_0060.png" x={x} y={y} anchor={{ x: 0, y: 0 }} scale={2} />;
+  return (
+    <Sprite
+      image="set2/tile_0060.png"
+      x={destination.x * 32}
+      y={destination.y * 32}
+      anchor={{ x: 0, y: 0 }}
+      scale={2}
+    />
+  );
 }

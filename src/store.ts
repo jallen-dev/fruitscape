@@ -5,6 +5,7 @@ interface State {
   tileNames?: string[];
   game?: GameState;
   yourPlayerId: string;
+  destination?: { x: number; y: number };
   loaded: boolean;
 }
 
@@ -13,6 +14,7 @@ interface Actions {
   setGame: (game: GameState) => void;
   setYourPlayerId: (yourPlayerId: string) => void;
   setLoaded: (loaded: boolean) => void;
+  setDestination: (destination: { x: number; y: number }) => void;
 }
 
 export const useStore = create<State & Actions>()((set) => ({
@@ -22,4 +24,5 @@ export const useStore = create<State & Actions>()((set) => ({
   setGame: (game) => set({ game }),
   setYourPlayerId: (yourPlayerId) => set({ yourPlayerId }),
   setLoaded: (loaded) => set({ loaded }),
+  setDestination: (destination) => set({ destination }),
 }));

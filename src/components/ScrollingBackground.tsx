@@ -14,6 +14,7 @@ export function ScrollingBackground() {
   const containerRef = useRef<IContainer>(null);
   const game = useStore((state) => state.game);
   const yourPlayerId = useStore((state) => state.yourPlayerId);
+  const setDestination = useStore((state) => state.setDestination);
 
   const app = useApp();
   app.resizeTo = window;
@@ -56,7 +57,8 @@ export function ScrollingBackground() {
           const yTiles = Math.floor((event.screen.y - 16) / 32);
           const nextCoords = [x + xTiles, y + yTiles];
           console.log({ nextCoords });
-          Rune.actions.movePlayer({ playerId: yourPlayerId, location: { x: nextCoords[0], y: nextCoords[1] } });
+          // Rune.actions.movePlayer({ playerId: yourPlayerId, location: { x: nextCoords[0], y: nextCoords[1] } });
+          setDestination({ x: nextCoords[0], y: nextCoords[1] });
         }}
       />
     </>
