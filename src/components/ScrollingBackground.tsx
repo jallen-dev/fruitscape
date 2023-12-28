@@ -13,8 +13,8 @@ type IContainer = PixiRef<typeof Container>;
 export function ScrollingBackground() {
   const containerRef = useRef<IContainer>(null);
   const game = useStore((state) => state.game);
+  const players = useStore((state) => state.players);
   const yourPlayerId = useStore((state) => state.yourPlayerId);
-  const setDestination = useStore((state) => state.setDestination);
 
   const app = useApp();
   app.resizeTo = window;
@@ -36,7 +36,12 @@ export function ScrollingBackground() {
       <Container x={-x * 32 - 9} y={-y * 32 + 12}>
         <Background />
         {otherPlayers.map((player) => (
-          <Character key={player.playerId} character={player.character} location={player.location} />
+          <Character
+            key={player.playerId}
+            character={player.character}
+            location={player.location}
+            name={players?.[player.playerId].displayName}
+          />
         ))}
         {game?.npcs.map((npc, index) => (
           <Character key={index} character={npc.character} location={npc.location} />

@@ -3,6 +3,7 @@ import { Character } from "./Character";
 
 export function Player() {
   const game = useStore((state) => state.game);
+  const players = useStore((state) => state.players);
   const playerId = useStore((state) => state.yourPlayerId);
 
   if (!game) {
@@ -15,5 +16,7 @@ export function Player() {
     return null;
   }
 
-  return <Character character={player.character} />;
+  const playerInfo = players?.[playerId];
+
+  return <Character character={player.character} name={playerInfo?.displayName} />;
 }

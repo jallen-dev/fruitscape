@@ -10,12 +10,14 @@ function App() {
   const game = useStore((state) => state.game);
   const playerId = useStore((state) => state.yourPlayerId);
   const setGame = useStore((state) => state.setGame);
+  const setPlayers = useStore((state) => state.setPlayers);
   const setYourPlayerId = useStore((state) => state.setYourPlayerId);
 
   useEffect(() => {
     Rune.initClient({
-      onChange: ({ game, yourPlayerId }) => {
+      onChange: ({ game, yourPlayerId, players }) => {
         setGame(game);
+        setPlayers(players);
         setYourPlayerId(yourPlayerId ?? "");
       },
     });
