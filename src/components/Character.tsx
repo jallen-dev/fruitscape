@@ -10,7 +10,8 @@ export function Character({ character, location }: { character: CharacterType; l
     return null;
   }
 
-  const x = location ? location.x * 32 : app.screen.width / 2 - 32;
-  const y = location ? location.y * 32 : app.screen.height / 2 - 16;
+  // TODO: fix this -16
+  const x = location ? location.x * 32 : app.screen.width / 2 - 16;
+  const y = location ? location.y * 32 : app.screen.height / 2;
   return <Sprite image={character} x={x} y={y} anchor={{ x: 0, y: 0 }} scale={2} />;
 }

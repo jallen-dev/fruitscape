@@ -21,8 +21,6 @@ export function ScrollingBackground() {
   const width = app.screen.width;
   const height = app.screen.height;
 
-  console.log({ width, height });
-
   const player = game?.players.find((p) => p.playerId === yourPlayerId);
 
   const HALF_HEIGHT_IN_TILES = Math.floor(height / 32 / 2);
@@ -51,14 +49,11 @@ export function ScrollingBackground() {
         height={height}
         interactive={true}
         pointerdown={(event) => {
-          console.log(event.screen);
           // TODO: +16 -9, -16 is probably due to screen not being perfectly divisible. See TODO above
           const xTiles = Math.floor((event.screen.x + 16 - 9) / 32);
           const yTiles = Math.floor((event.screen.y - 16) / 32);
           const nextCoords = [x + xTiles, y + yTiles];
-          console.log({ nextCoords });
-          // Rune.actions.movePlayer({ playerId: yourPlayerId, location: { x: nextCoords[0], y: nextCoords[1] } });
-          setDestination({ x: nextCoords[0], y: nextCoords[1] });
+          Rune.actions.setDestination({ playerId: yourPlayerId, destination: { x: nextCoords[0], y: nextCoords[1] } });
         }}
       />
     </>

@@ -13,7 +13,7 @@ export interface GameState {
 
 type GameActions = {
   increment: (params: { amount: number }) => void;
-  movePlayer: (params: { playerId: string; location: { x: number; y: number } }) => void;
+  setDestination: (params: { playerId: string; destination: { x: number; y: number } }) => void;
 };
 
 declare global {
@@ -33,6 +33,7 @@ Rune.initLogic({
       players: allPlayerIds.map((playerId, index) => ({
         playerId,
         location: locationForIndex(index),
+        destination: locationForIndex(index),
         character: ALL_CHARACTERS[Math.floor(Math.random() * ALL_CHARACTERS.length)],
         score: 0,
       })),
@@ -41,14 +42,35 @@ Rune.initLogic({
       objects: generateObjects(),
     };
   },
+  update: ({ game }) => {
+    game.players.forEach((player) => {
+      if (player.location.x === player.destination.x && player.location.y === player.destination.y) {
+        return;
+      }
+
+      if (player.location.x < player.destination.x) {
+        player.location.x += 1;
+      }
+      if (player.location.x > player.destination.x) {
+        player.location.x -= 1;
+      }
+      if (player.location.y < player.destination.y) {
+        player.location.y += 1;
+      }
+      if (player.location.y > player.destination.y) {
+        player.location.y -= 1;
+      }
+    });
+  },
   actions: {
     increment: ({ amount }, { game }) => {
       game.count += amount;
     },
-    movePlayer: ({ playerId, location }, { game }) => {
-      game.players.find((player) => player.playerId === playerId)!.location = location;
+    setDestination: ({ playerId, destination }, { game }) => {
+      game.players.find((player) => player.playerId === playerId)!.destination = destination;
     },
   },
+  updatesPerSecond: 8,
 });
 
 function locationForIndex(index: number) {
