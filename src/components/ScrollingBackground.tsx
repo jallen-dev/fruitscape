@@ -38,6 +38,9 @@ export function ScrollingBackground() {
         {otherPlayers.map((player) => (
           <Character key={player.playerId} character={player.character} location={player.location} />
         ))}
+        {game?.npcs.map((npc, index) => (
+          <Character key={index} character={npc.character} location={npc.location} />
+        ))}
       </Container>
       <Sprite
         texture={Texture.EMPTY}

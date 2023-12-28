@@ -1,3 +1,5 @@
+import { ALL_CHARACTERS, CharacterType } from "./characters";
+
 export const MAP_WIDTH = 30;
 export const MAP_HEIGHT = 50;
 
@@ -40,8 +42,29 @@ export function generateObjects() {
   for (let i = 0; i < 10; i++) {
     const x = Math.floor(Math.random() * objects[0].length);
     const y = Math.floor(Math.random() * objects.length);
-    objects[y][x] = 216;
+    objects[y][x] = 28;
   }
 
   return objects;
+}
+
+export type NPC = {
+  character: CharacterType;
+  location: { x: number; y: number };
+};
+
+export function generateNPCs() {
+  const npcs = [];
+
+  for (let i = 0; i < 10; i++) {
+    npcs.push({
+      character: ALL_CHARACTERS[Math.floor(Math.random() * ALL_CHARACTERS.length)],
+      location: {
+        x: Math.floor(Math.random() * MAP_WIDTH),
+        y: Math.floor(Math.random() * MAP_HEIGHT),
+      },
+    });
+  }
+
+  return npcs;
 }

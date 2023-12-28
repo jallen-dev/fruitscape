@@ -1,11 +1,12 @@
 import type { RuneClient } from "rune-games-sdk/multiplayer";
 import { ALL_CHARACTERS } from "../characters";
 import { Player } from "./Player";
-import { MAP_HEIGHT, MAP_WIDTH, TileMapData, generateBackground, generateObjects } from "../maps";
+import { MAP_HEIGHT, MAP_WIDTH, NPC, TileMapData, generateBackground, generateNPCs, generateObjects } from "../maps";
 
 export interface GameState {
   count: number;
   players: Player[];
+  npcs: NPC[];
   background: TileMapData;
   objects: TileMapData;
 }
@@ -35,6 +36,7 @@ Rune.initLogic({
         character: ALL_CHARACTERS[Math.floor(Math.random() * ALL_CHARACTERS.length)],
         score: 0,
       })),
+      npcs: generateNPCs(),
       background: generateBackground(),
       objects: generateObjects(),
     };
