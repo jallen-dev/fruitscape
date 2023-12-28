@@ -1,7 +1,7 @@
 import type { RuneClient } from "rune-games-sdk/multiplayer";
 import { ALL_CHARACTERS } from "../characters";
 import { Player } from "./Player";
-import { TileMapData, generateBackground, generateObjects } from "../maps";
+import { MAP_HEIGHT, MAP_WIDTH, TileMapData, generateBackground, generateObjects } from "../maps";
 
 export interface GameState {
   count: number;
@@ -31,7 +31,7 @@ Rune.initLogic({
       count: 0,
       players: allPlayerIds.map((playerId, index) => ({
         playerId,
-        location: { x: 0, y: 0 },
+        location: locationForIndex(index),
         character: ALL_CHARACTERS[Math.floor(Math.random() * ALL_CHARACTERS.length)],
         score: 0,
       })),
@@ -48,3 +48,17 @@ Rune.initLogic({
     },
   },
 });
+
+function locationForIndex(index: number) {
+  if (index === 0) {
+    return { x: Math.floor(MAP_WIDTH / 2) - 1, y: Math.floor(MAP_HEIGHT / 2) };
+  }
+  if (index === 1) {
+    return { x: Math.floor(MAP_WIDTH / 2) + 1, y: Math.floor(MAP_HEIGHT / 2) };
+  }
+  if (index === 2) {
+    return { x: Math.floor(MAP_WIDTH / 2), y: Math.floor(MAP_HEIGHT / 2) - 1 };
+  }
+
+  return { x: Math.floor(MAP_WIDTH / 2), y: Math.floor(MAP_HEIGHT / 2) + 1 };
+}

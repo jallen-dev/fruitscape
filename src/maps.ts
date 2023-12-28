@@ -1,10 +1,10 @@
-const WIDTH = 100;
-const HEIGHT = 100;
+export const MAP_WIDTH = 30;
+export const MAP_HEIGHT = 50;
 
 export type TileMapData = (number | undefined)[][];
 
 export function generateBackground(debug = false) {
-  const background: TileMapData = Array.from({ length: HEIGHT }, () => Array.from({ length: WIDTH }, () => 0));
+  const background: TileMapData = Array.from({ length: MAP_HEIGHT }, () => Array.from({ length: MAP_WIDTH }, () => 0));
 
   // randomly add some grass
   for (let i = 0; i < 10; i++) {
@@ -35,7 +35,7 @@ export function generateBackground(debug = false) {
 }
 
 export function generateObjects() {
-  const objects: TileMapData = Array.from({ length: HEIGHT }, () => Array.from({ length: WIDTH }, () => undefined));
+  const objects: TileMapData = Array.from({ length: MAP_HEIGHT }, () => Array.from({ length: MAP_WIDTH }, () => undefined));
 
   for (let i = 0; i < 10; i++) {
     const x = Math.floor(Math.random() * objects[0].length);
