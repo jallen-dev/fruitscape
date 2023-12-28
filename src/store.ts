@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { GameState } from "./logic/logic";
 import { Player, PlayerId } from "rune-games-sdk";
+import { subscribeWithSelector } from "zustand/middleware";
 
 interface State {
   tileNames?: string[];
@@ -20,13 +21,15 @@ interface Actions {
   setDestination: (destination: { x: number; y: number }) => void;
 }
 
-export const useStore = create<State & Actions>()((set) => ({
-  yourPlayerId: "",
-  loaded: false,
-  setTileNames: (tileNames) => set({ tileNames }),
-  setGame: (game) => set({ game }),
-  setPlayers: (players) => set({ players }),
-  setYourPlayerId: (yourPlayerId) => set({ yourPlayerId }),
-  setLoaded: (loaded) => set({ loaded }),
-  setDestination: (destination) => set({ destination }),
-}));
+export const useStore = create<State & Actions>()(
+  subscribeWithSelector((set) => ({
+    yourPlayerId: "",
+    loaded: false,
+    setTileNames: (tileNames) => set({ tileNames }),
+    setGame: (game) => set({ game }),
+    setPlayers: (players) => set({ players }),
+    setYourPlayerId: (yourPlayerId) => set({ yourPlayerId }),
+    setLoaded: (loaded) => set({ loaded }),
+    setDestination: (destination) => set({ destination }),
+  }))
+);

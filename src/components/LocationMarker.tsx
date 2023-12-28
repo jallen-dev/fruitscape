@@ -10,7 +10,7 @@ export function LocationMarker({ location }: { location?: { x: number; y: number
     return null;
   }
 
-  const player = game.players.find((p) => p.playerId === playerId);
+  const player = game.players[playerId];
 
   if (!player) {
     return null;

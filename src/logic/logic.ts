@@ -1,11 +1,11 @@
-import type { RuneClient } from "rune-games-sdk/multiplayer";
+import type { PlayerId, RuneClient } from "rune-games-sdk/multiplayer";
 import { ALL_CHARACTERS } from "../characters";
 import { Player } from "./Player";
 import { MAP_HEIGHT, MAP_WIDTH, NPC, TileMapData, generateBackground, generateNPCs, generateObjects } from "../maps";
 
 export interface GameState {
   count: number;
-  players: Player[];
+  players: Record<PlayerId, Player>;
   npcs: NPC[];
   background: TileMapData;
   objects: TileMapData;
@@ -30,22 +30,25 @@ Rune.initLogic({
   setup: (allPlayerIds): GameState => {
     return {
       count: 0,
-      players: allPlayerIds.map((playerId, index) => ({
-        playerId,
-        location: locationForIndex(index),
-        destination: locationForIndex(index),
-        character: ALL_CHARACTERS[Math.floor(Math.random() * ALL_CHARACTERS.length)],
-        score: 0,
-      })),
+      players: allPlayerIds.reduce((acc, playerId, index) => {
+        acc[playerId] = {
+          playerId,
+          location: locationForIndex(index),
+          destination: locationForIndex(index),
+          character: ALL_CHARACTERS[Math.floor(Math.random() * ALL_CHARACTERS.length)],
+          score: 0,
+        };
+        return acc;
+      }, {} as Record<PlayerId, Player>),
       npcs: generateNPCs(),
       background: generateBackground(),
       objects: generateObjects(),
     };
   },
   update: ({ game }) => {
-    game.players.forEach((player) => {
+    for (const player of Object.values(game.players)) {
       if (player.location.x === player.destination.x && player.location.y === player.destination.y) {
-        return;
+        continue;
       }
 
       if (player.location.x < player.destination.x) {
@@ -60,14 +63,14 @@ Rune.initLogic({
       if (player.location.y > player.destination.y) {
         player.location.y -= 1;
       }
-    });
+    }
   },
   actions: {
     increment: ({ amount }, { game }) => {
       game.count += amount;
     },
     setDestination: ({ playerId, destination }, { game }) => {
-      game.players.find((player) => player.playerId === playerId)!.destination = destination;
+      game.players[playerId].destination = destination;
     },
   },
   updatesPerSecond: 8,

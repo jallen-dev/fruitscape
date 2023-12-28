@@ -28,6 +28,20 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = useStore.subscribe(
+      (state) => state.game?.players[playerId],
+      (player) => {
+        if (player && player.location.x === player.destination.x && player.location.y === player.destination.y) {
+          console.log("Player arrived at destination");
+          // TODO: check if player is on a npc
+        }
+      }
+    );
+
+    return unsubscribe;
+  }, [playerId]);
+
   if (!game) {
     return <div>Loading...</div>;
   }

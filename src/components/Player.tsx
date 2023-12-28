@@ -10,7 +10,7 @@ export function Player() {
     return null;
   }
 
-  const player = game.players.find((p) => p.playerId === playerId);
+  const player = game.players[playerId];
 
   if (!player) {
     return null;

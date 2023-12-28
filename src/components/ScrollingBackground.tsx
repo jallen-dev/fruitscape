@@ -21,14 +21,14 @@ export function ScrollingBackground() {
   const width = app.screen.width;
   const height = app.screen.height;
 
-  const player = game?.players.find((p) => p.playerId === yourPlayerId);
+  const player = game?.players[yourPlayerId];
 
   const HALF_HEIGHT_IN_TILES = Math.floor(height / 32 / 2);
   const HALF_WIDTH_IN_TILES = Math.floor(width / 32 / 2);
   const x = player ? player.location.x - HALF_WIDTH_IN_TILES : 0;
   const y = player ? player.location.y - HALF_HEIGHT_IN_TILES : 0;
 
-  const otherPlayers = game?.players.filter((p) => p.playerId !== yourPlayerId) ?? [];
+  const otherPlayers = Object.values(game?.players ?? {}).filter((player) => player.playerId !== yourPlayerId);
 
   return (
     <>
