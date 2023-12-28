@@ -1,23 +1,14 @@
-import { Assets } from "@pixi/assets";
-import { useEffect, useState } from "react";
-import { BaseTexture } from "@pixi/core";
-import { Spritesheet } from "@pixi/spritesheet";
 import { Container } from "@pixi/react";
-import data from "../atlas/background.json";
+
 import { background, objects } from "../maps";
 
-import { SCALE_MODES } from "@pixi/constants";
 import { TileMap } from "./TileMap";
+import { useStore } from "../store";
 
 export function Background() {
-  const [tileNames, setTileNames] = useState<string[]>(null!);
-  useEffect(() => {
-    load().then((sheet) => {
-      setTileNames(Object.keys(sheet));
-    });
-  }, []);
+  const tileNames = useStore((state) => state.tileNames);
 
-  if (!tileNames) {
+  if (!tileNames.length) {
     return null;
   }
 
@@ -26,16 +17,4 @@ export function Background() {
       <TileMap layers={[background, objects]} tileNames={tileNames} />
     </Container>
   );
-}
-
-async function load() {
-  Assets.add({
-    alias: "background.png",
-    src: "background.png",
-    data: { scaleMode: SCALE_MODES.NEAREST },
-  });
-  await Assets.load("background.png");
-
-  const sheet = new Spritesheet(BaseTexture.from("background.png"), data);
-  return await sheet.parse();
 }
