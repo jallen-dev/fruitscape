@@ -29,7 +29,11 @@ export function Background() {
 }
 
 async function load() {
-  Assets.add({ alias: "background.png", src: "assets/background.png", data: { scaleMode: SCALE_MODES.NEAREST } });
+  Assets.add({
+    alias: "background.png",
+    src: "background.png",
+    data: { scaleMode: SCALE_MODES.NEAREST },
+  });
   await Assets.load("background.png");
 
   const sheet = new Spritesheet(BaseTexture.from("background.png"), data);
