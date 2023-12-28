@@ -6,6 +6,7 @@ import { Background } from "./Background";
 import { useRef, useState } from "react";
 import { useStore } from "../store";
 import { Character } from "./Character";
+import { LocationMarker } from "./LocationMarker";
 
 type IContainer = PixiRef<typeof Container>;
 
@@ -41,6 +42,7 @@ export function ScrollingBackground() {
         {game?.npcs.map((npc, index) => (
           <Character key={index} character={npc.character} location={npc.location} />
         ))}
+        <LocationMarker location={player?.location} />
       </Container>
       <Sprite
         texture={Texture.EMPTY}
