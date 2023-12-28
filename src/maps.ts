@@ -19,6 +19,15 @@ for (let i = 0; i < 10; i++) {
   background[y][x] = 2;
 }
 
+// place flowers in a checkerboard pattern (for testing)
+// for (let y = 0; y < background.length; y++) {
+//   for (let x = 0; x < background[y].length; x++) {
+//     if ((x + y) % 2 === 0) {
+//       background[y][x] = 25;
+//     }
+//   }
+// }
+
 export const objects: TileMapData = Array.from({ length: HEIGHT }, () => Array.from({ length: WIDTH }, () => undefined));
 
 for (let i = 0; i < 10; i++) {

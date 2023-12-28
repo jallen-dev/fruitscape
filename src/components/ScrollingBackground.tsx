@@ -11,7 +11,6 @@ type IContainer = PixiRef<typeof Container>;
 
 export function ScrollingBackground() {
   const containerRef = useRef<IContainer>(null);
-  const [coords, setCoords] = useState([0, 0]);
   const game = useStore((state) => state.game);
   const yourPlayerId = useStore((state) => state.yourPlayerId);
 
@@ -22,12 +21,19 @@ export function ScrollingBackground() {
 
   console.log({ width, height });
 
+  const player = game?.players.find((p) => p.playerId === yourPlayerId);
+
+  const HALF_HEIGHT_IN_TILES = Math.floor(height / 32 / 2);
+  const HALF_WIDTH_IN_TILES = Math.floor(width / 32 / 2);
+  const x = player ? player.location.x - HALF_WIDTH_IN_TILES : 0;
+  const y = player ? player.location.y - HALF_HEIGHT_IN_TILES : 0;
+
   const otherPlayers = game?.players.filter((p) => p.playerId !== yourPlayerId) ?? [];
 
-  const [x, y] = coords;
   return (
     <>
-      <Container x={x} y={y}>
+      {/* TODO: this -9 and +12 might be due to the screen width and height not being perfectly divisible. maybe check that out and make sure it looks centered no matter the screen dimensions */}
+      <Container x={-x * 32 - 9} y={-y * 32 + 12}>
         <Background />
         {otherPlayers.map((player) => (
           <Character key={player.playerId} character={player.character} location={player.location} />
@@ -40,10 +46,12 @@ export function ScrollingBackground() {
         interactive={true}
         pointerdown={(event) => {
           console.log(event.screen);
-          const nextCoords = [x - (event.screen.x - width / 2), y - (event.screen.y - height / 2)];
+          // TODO: +16 -9, -16 is probably due to screen not being perfectly divisible. See TODO above
+          const xTiles = Math.floor((event.screen.x + 16 - 9) / 32);
+          const yTiles = Math.floor((event.screen.y - 16) / 32);
+          const nextCoords = [x + xTiles, y + yTiles];
           console.log({ nextCoords });
-          //   const nextCoords = [x - 10, y - 10];
-          setCoords(nextCoords);
+          Rune.actions.movePlayer({ playerId: yourPlayerId, location: { x: nextCoords[0], y: nextCoords[1] } });
         }}
       />
     </>

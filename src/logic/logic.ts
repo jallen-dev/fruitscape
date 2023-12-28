@@ -9,6 +9,7 @@ export interface GameState {
 
 type GameActions = {
   increment: (params: { amount: number }) => void;
+  movePlayer: (params: { playerId: string; location: { x: number; y: number } }) => void;
 };
 
 declare global {
@@ -36,6 +37,9 @@ Rune.initLogic({
   actions: {
     increment: ({ amount }, { game }) => {
       game.count += amount;
+    },
+    movePlayer: ({ playerId, location }, { game }) => {
+      game.players.find((player) => player.playerId === playerId)!.location = location;
     },
   },
 });
