@@ -27,3 +27,5 @@ export const ALL_CHARACTERS = [
   darkWizard,
   archer,
 ] as const;
+
+export type CharacterType = (typeof ALL_CHARACTERS)[number];
