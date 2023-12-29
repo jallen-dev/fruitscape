@@ -1,13 +1,14 @@
 import { useStore } from "../store";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
-import { ALL_FRUIT_TYPES, FRUIT_IMAGES } from "../models/Fruit";
+import { FRUIT_IMAGES, FruitType } from "../models/Fruit";
 
 export function Trade() {
+  const inventory = useStore((state) => state.game?.players[state.yourPlayerId].inventory);
   const tradeOpen = useStore((state) => state.tradeOpen);
   const setTradeOpen = useStore((state) => state.setTradeOpen);
 
-  if (!tradeOpen) {
+  if (!tradeOpen || !inventory) {
     return null;
   }
 
@@ -19,8 +20,18 @@ export function Trade() {
           <Dialog.Title>Trade</Dialog.Title>
           <Dialog.Description>
             <div className="flex flex-wrap">
-              {ALL_FRUIT_TYPES.map((fruitType) => (
-                <img src={FRUIT_IMAGES[fruitType]} alt={fruitType} key={fruitType} className="w-16 h-16" />
+              {Object.entries(inventory).map(([fruitType, quantity]) => (
+                <div className="relative">
+                  <img
+                    src={FRUIT_IMAGES[fruitType as FruitType]}
+                    alt={fruitType}
+                    key={fruitType}
+                    className="w-16 h-16"
+                  />
+                  <div className="absolute top-0 right-0 text-white text-sm font-bold bg-zinc-700 rounded-sm px-0.5 leading-snug">
+                    {quantity}
+                  </div>
+                </div>
               ))}
             </div>
           </Dialog.Description>

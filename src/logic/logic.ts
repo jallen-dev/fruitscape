@@ -2,6 +2,7 @@ import type { PlayerId, RuneClient } from "rune-games-sdk/multiplayer";
 import { ALL_CHARACTERS } from "../characters";
 import { Player } from "./Player";
 import { MAP_HEIGHT, MAP_WIDTH, NPC, TileMapData, generateBackground, generateNPCs, generateObjects } from "../maps";
+import { ALL_FRUIT_TYPES } from "../models/Fruit";
 
 export interface GameState {
   count: number;
@@ -31,12 +32,14 @@ Rune.initLogic({
     return {
       count: 0,
       players: allPlayerIds.reduce((acc, playerId, index) => {
+        const randomFruit = ALL_FRUIT_TYPES[Math.floor(Math.random() * ALL_FRUIT_TYPES.length)];
         acc[playerId] = {
           playerId,
           location: locationForIndex(index),
           destination: locationForIndex(index),
           character: ALL_CHARACTERS[Math.floor(Math.random() * ALL_CHARACTERS.length)],
           score: 0,
+          inventory: { [randomFruit]: 10 },
         };
         return acc;
       }, {} as Record<PlayerId, Player>),

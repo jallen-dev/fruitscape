@@ -1,4 +1,4 @@
-enum FruitType {
+export enum FruitType {
   RedCherry = "Red Cherry",
   BlackCherry = "Black Cherry",
   Cranberry = "Cranberry",

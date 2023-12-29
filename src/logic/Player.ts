@@ -1,4 +1,5 @@
 import { CharacterType } from "../characters";
+import { FruitType } from "../models/Fruit";
 
 export type Player = {
   playerId: string;
@@ -6,4 +7,5 @@ export type Player = {
   destination: { x: number; y: number };
   character: CharacterType;
   score: number;
+  inventory: Partial<Record<FruitType, number>>;
 };
