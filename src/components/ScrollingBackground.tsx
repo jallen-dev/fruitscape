@@ -23,17 +23,15 @@ export function ScrollingBackground() {
 
   const player = game?.players[yourPlayerId];
 
-  const HALF_HEIGHT_IN_TILES = Math.floor(height / 32 / 2);
-  const HALF_WIDTH_IN_TILES = Math.floor(width / 32 / 2);
-  const x = player ? player.location.x - HALF_WIDTH_IN_TILES : 0;
-  const y = player ? player.location.y - HALF_HEIGHT_IN_TILES : 0;
+  const HALF_TILE = 16;
+  const x = player ? -player.location.x * 32 + width / 2 - HALF_TILE : 0;
+  const y = player ? -player.location.y * 32 + height / 2 : 0;
 
   const otherPlayers = Object.values(game?.players ?? {}).filter((player) => player.playerId !== yourPlayerId);
 
   return (
     <>
-      {/* TODO: this -9 and +12 might be due to the screen width and height not being perfectly divisible. maybe check that out and make sure it looks centered no matter the screen dimensions */}
-      <Container x={-x * 32 - 9} y={-y * 32 + 12}>
+      <Container x={x} y={y}>
         <Background />
         {otherPlayers.map((player) => (
           <Character
@@ -54,10 +52,13 @@ export function ScrollingBackground() {
         height={height}
         interactive={true}
         pointerdown={(event) => {
-          // TODO: +16 -9, -16 is probably due to screen not being perfectly divisible. See TODO above
-          const xTiles = Math.floor((event.screen.x + 16 - 9) / 32);
-          const yTiles = Math.floor((event.screen.y - 16) / 32);
-          const nextCoords = [x + xTiles, y + yTiles];
+          if (!player) {
+            return;
+          }
+
+          const xTiles = Math.floor((event.screen.x - width / 2 + HALF_TILE) / 32);
+          const yTiles = Math.floor((event.screen.y - height / 2) / 32);
+          const nextCoords = [player.location.x + xTiles, player.location.y + yTiles];
           Rune.actions.setDestination({ playerId: yourPlayerId, destination: { x: nextCoords[0], y: nextCoords[1] } });
         }}
       />
