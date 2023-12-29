@@ -1,6 +1,7 @@
 import { useStore } from "../store";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import { ALL_FRUIT_TYPES, FRUIT_IMAGES } from "../models/Fruit";
 
 export function Trade() {
   const tradeOpen = useStore((state) => state.tradeOpen);
@@ -16,7 +17,13 @@ export function Trade() {
         <Dialog.Overlay className="bg-black w-full h-full absolute opacity-50" onClick={() => setTradeOpen(false)} />
         <Dialog.Content className="absolute top-1/2 left-1/2 w-5/6 h-5/6 bg-amber-200 -translate-x-1/2 -translate-y-1/2 rounded-md">
           <Dialog.Title>Trade</Dialog.Title>
-          <Dialog.Description />
+          <Dialog.Description>
+            <div className="flex flex-wrap">
+              {ALL_FRUIT_TYPES.map((fruitType) => (
+                <img src={FRUIT_IMAGES[fruitType]} alt={fruitType} key={fruitType} className="w-16 h-16" />
+              ))}
+            </div>
+          </Dialog.Description>
           <Dialog.Close asChild>
             <button
               className="absolute right-4 top-4"
