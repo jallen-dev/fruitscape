@@ -11,6 +11,7 @@ interface State {
   destination?: { x: number; y: number };
   loaded: boolean;
   tradeOpen: boolean;
+  tradePartner?: string;
 }
 
 interface Actions {
@@ -21,6 +22,7 @@ interface Actions {
   setLoaded: (loaded: boolean) => void;
   setDestination: (destination: { x: number; y: number }) => void;
   setTradeOpen: (tradeOpen: boolean) => void;
+  setTradePartner: (tradePartner: string) => void;
 }
 
 export const useStore = create<State & Actions>()(
@@ -35,5 +37,6 @@ export const useStore = create<State & Actions>()(
     setLoaded: (loaded) => set({ loaded }),
     setDestination: (destination) => set({ destination }),
     setTradeOpen: (tradeOpen) => set({ tradeOpen }),
+    setTradePartner: (tradePartner) => set({ tradePartner }),
   }))
 );

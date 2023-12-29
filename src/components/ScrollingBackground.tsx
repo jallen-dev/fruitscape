@@ -41,7 +41,7 @@ export function ScrollingBackground() {
             name={players?.[player.playerId].displayName}
           />
         ))}
-        {game?.npcs.map((npc, index) => (
+        {Object.values(game?.npcs ?? {}).map((npc, index) => (
           <Character key={index} character={npc.character} location={npc.location} />
         ))}
         <LocationMarker location={player?.location} />

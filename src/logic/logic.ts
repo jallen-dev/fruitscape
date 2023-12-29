@@ -3,12 +3,13 @@ import { ALL_CHARACTER_TYPES } from "../models/Character";
 import { Player } from "./Player";
 import { ALL_FRUIT_TYPES } from "../models/Fruit";
 import { MAP_WIDTH, MAP_HEIGHT } from "../constants";
-import { NPC, TileMapData, generateNPCs, generateBackground, generateObjects } from "../utils";
+import { TileMapData, generateNPCs, generateBackground, generateObjects } from "../utils";
+import { Npc } from "../models/Npc";
 
 export interface GameState {
   count: number;
   players: Record<PlayerId, Player>;
-  npcs: NPC[];
+  npcs: Record<string, Npc>;
   background: TileMapData;
   objects: TileMapData;
 }

@@ -34,9 +34,11 @@ function App() {
       (state) => state.game?.players[playerId],
       (player) => {
         if (player && player.location.x === player.destination.x && player.location.y === player.destination.y) {
-          for (const npc of useStore.getState().game?.npcs ?? []) {
+          // player has reached their destination. check if there's an NPC there
+          for (const npc of Object.values(useStore.getState().game?.npcs ?? {})) {
             if (npc.location.x === player.location.x && npc.location.y === player.location.y) {
               useStore.getState().setTradeOpen(true);
+              useStore.getState().setTradePartner(npc.id);
               return;
             }
           }
