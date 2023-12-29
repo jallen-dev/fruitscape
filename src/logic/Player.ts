@@ -1,4 +1,4 @@
-import { CharacterType } from "../characters";
+import { CharacterType } from "../models/Character";
 import { FruitType } from "../models/Fruit";
 
 export type Player = {

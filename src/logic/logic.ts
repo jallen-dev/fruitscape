@@ -1,8 +1,9 @@
 import type { PlayerId, RuneClient } from "rune-games-sdk/multiplayer";
-import { ALL_CHARACTERS } from "../characters";
+import { ALL_CHARACTER_TYPES } from "../models/Character";
 import { Player } from "./Player";
-import { MAP_HEIGHT, MAP_WIDTH, NPC, TileMapData, generateBackground, generateNPCs, generateObjects } from "../maps";
 import { ALL_FRUIT_TYPES } from "../models/Fruit";
+import { MAP_WIDTH, MAP_HEIGHT } from "../constants";
+import { NPC, TileMapData, generateNPCs, generateBackground, generateObjects } from "../utils";
 
 export interface GameState {
   count: number;
@@ -37,7 +38,7 @@ Rune.initLogic({
           playerId,
           location: locationForIndex(index),
           destination: locationForIndex(index),
-          character: ALL_CHARACTERS[Math.floor(Math.random() * ALL_CHARACTERS.length)],
+          character: ALL_CHARACTER_TYPES[Math.floor(Math.random() * ALL_CHARACTER_TYPES.length)],
           score: 0,
           inventory: { [randomFruit]: 10 },
         };

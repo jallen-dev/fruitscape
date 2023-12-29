@@ -1,7 +1,21 @@
-import { ALL_CHARACTERS, CharacterType } from "./characters";
+import { MAP_HEIGHT, MAP_WIDTH } from "./constants";
+import { ALL_CHARACTER_TYPES, CharacterType } from "./models/Character";
 
-export const MAP_WIDTH = 30;
-export const MAP_HEIGHT = 50;
+export function generateNPCs() {
+  const npcs = [];
+
+  for (let i = 0; i < 10; i++) {
+    npcs.push({
+      character: ALL_CHARACTER_TYPES[Math.floor(Math.random() * ALL_CHARACTER_TYPES.length)],
+      location: {
+        x: Math.floor(Math.random() * MAP_WIDTH),
+        y: Math.floor(Math.random() * MAP_HEIGHT),
+      },
+    });
+  }
+
+  return npcs;
+}
 
 export type TileMapData = (number | undefined)[][];
 
@@ -37,7 +51,9 @@ export function generateBackground(debug = false) {
 }
 
 export function generateObjects() {
-  const objects: TileMapData = Array.from({ length: MAP_HEIGHT }, () => Array.from({ length: MAP_WIDTH }, () => undefined));
+  const objects: TileMapData = Array.from({ length: MAP_HEIGHT }, () =>
+    Array.from({ length: MAP_WIDTH }, () => undefined)
+  );
 
   for (let i = 0; i < 10; i++) {
     const x = Math.floor(Math.random() * objects[0].length);
@@ -52,19 +68,3 @@ export type NPC = {
   character: CharacterType;
   location: { x: number; y: number };
 };
-
-export function generateNPCs() {
-  const npcs = [];
-
-  for (let i = 0; i < 10; i++) {
-    npcs.push({
-      character: ALL_CHARACTERS[Math.floor(Math.random() * ALL_CHARACTERS.length)],
-      location: {
-        x: Math.floor(Math.random() * MAP_WIDTH),
-        y: Math.floor(Math.random() * MAP_HEIGHT),
-      },
-    });
-  }
-
-  return npcs;
-}

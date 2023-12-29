@@ -1,6 +1,6 @@
 import { Container, Sprite, Text, useApp } from "@pixi/react";
 import { TextStyle } from "@pixi/text";
-import { CharacterType } from "../characters";
+import { CHARACTER_IMAGES, CharacterType } from "../models/Character";
 import { useStore } from "../store";
 
 export function Character({
@@ -25,7 +25,7 @@ export function Character({
   return (
     <Container x={x} y={y}>
       <Text text={name ?? ""} anchor={{ x: 0.5, y: 0 }} y={-30} style={new TextStyle({ fontSize: 18 })} />
-      <Sprite image={character} scale={2} anchor={{ x: 0.5, y: 0 }} />
+      <Sprite image={CHARACTER_IMAGES[character]} scale={2} anchor={{ x: 0.5, y: 0 }} />
     </Container>
   );
 }
