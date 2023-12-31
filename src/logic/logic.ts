@@ -3,13 +3,14 @@ import { ALL_CHARACTER_TYPES } from "../models/Character"
 import { Player } from "./Player"
 import { FruitType } from "../models/Fruit"
 import { MAP_WIDTH, MAP_HEIGHT } from "../constants"
-import { generateFruit, generateNPCs } from "../utils"
+import { generateFruit, generateNPCs, generateRecipe } from "../utils"
 import { Npc } from "../models/Npc"
 
 export interface GameState {
   count: number
   players: Record<PlayerId, Player>
   npcs: Record<string, Npc>
+  currentRecipe: Partial<Record<FruitType, number>>
 }
 
 type GameActions = {
@@ -47,6 +48,7 @@ Rune.initLogic({
         return acc
       }, {} as Record<PlayerId, Player>),
       npcs: generateNPCs(startingFruits),
+      currentRecipe: generateRecipe(startingFruits, 3),
     }
   },
   update: ({ game }) => {

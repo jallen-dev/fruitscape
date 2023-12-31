@@ -32,3 +32,11 @@ export function generateNPCs(fruits: FruitType[]) {
 
   return npcs
 }
+
+export function generateRecipe(fruits: FruitType[], numIngredients = 3) {
+  const shuffledFruits = fruits.sort(() => 0.5 - Math.random())
+  return shuffledFruits.slice(0, numIngredients).reduce((acc, fruit) => {
+    acc[fruit] = (acc[fruit] || 0) + 1
+    return acc
+  }, {} as Partial<Record<FruitType, number>>)
+}

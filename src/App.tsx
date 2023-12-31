@@ -6,6 +6,8 @@ import { load } from "./loadAssets.ts"
 import { useStore } from "./store.ts"
 import { Player } from "./components/Player.tsx"
 import { Trade } from "./components/Trade.tsx"
+import { MAP_HEIGHT, MAP_WIDTH } from "./constants.ts"
+import { Recipe } from "./components/Recipe.tsx"
 
 function App() {
   const game = useStore((state) => state.game)
@@ -35,7 +37,14 @@ function App() {
       (state) => state.game?.players[playerId],
       (player) => {
         if (player && player.location.x === player.destination.x && player.location.y === player.destination.y) {
-          // player has reached their destination. check if there's an NPC there
+          // player has reached their destination.
+
+          // check if they are standing on the chest
+          if (player.location.x === Math.floor(MAP_WIDTH / 2) && player.location.y === Math.floor(MAP_HEIGHT / 2)) {
+            useStore.getState().setRecipeOpen(true)
+          }
+
+          // check if there's an NPC there
           for (const npc of Object.values(useStore.getState().game?.npcs ?? {})) {
             if (npc.location.x === player.location.x && npc.location.y === player.location.y) {
               useStore.getState().setTradeOpen(true)
@@ -61,6 +70,7 @@ function App() {
         <Player />
       </Stage>
       <Trade />
+      <Recipe />
     </div>
   )
 }
