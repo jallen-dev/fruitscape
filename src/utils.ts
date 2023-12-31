@@ -2,6 +2,7 @@ import { MAP_HEIGHT, MAP_WIDTH } from "./constants"
 import { ALL_CHARACTER_TYPES } from "./models/Character"
 import { ALL_FRUIT_TYPES, FruitType } from "./models/Fruit"
 import { Npc } from "./models/Npc"
+import { npcs as npcsMap } from "./assets/maps"
 
 export function generateFruit(numFruit = 10) {
   // shuffle all fruits
@@ -12,7 +13,14 @@ export function generateFruit(numFruit = 10) {
 export function generateNPCs(fruits: FruitType[]) {
   const npcs: Record<string, Npc> = {}
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < npcsMap.length; i++) {
+    if (npcsMap[i] === 0) {
+      continue
+    }
+
+    const y = Math.floor(i / MAP_WIDTH)
+    const x = i % MAP_WIDTH
+
     const offeredFruit = fruits[Math.floor(Math.random() * fruits.length)]
     const desiredFruit = fruits.filter((fruit) => fruit !== offeredFruit)[
       Math.floor(Math.random() * (fruits.length - 1))
@@ -22,8 +30,8 @@ export function generateNPCs(fruits: FruitType[]) {
       id: i.toString(),
       character: ALL_CHARACTER_TYPES[Math.floor(Math.random() * ALL_CHARACTER_TYPES.length)],
       location: {
-        x: Math.floor(Math.random() * MAP_WIDTH),
-        y: Math.floor(Math.random() * MAP_HEIGHT),
+        x,
+        y,
       },
       offeredFruit,
       desiredFruit,
