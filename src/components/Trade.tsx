@@ -5,6 +5,7 @@ import { FRUIT_IMAGES, FruitType } from "../models/Fruit"
 import { Inventory } from "./Inventory"
 
 export function Trade() {
+  const playerId = useStore((state) => state.yourPlayerId)
   const tradeOpen = useStore((state) => state.tradeOpen)
   const tradePartner = useStore((state) => state.tradePartner)
   const setTradeOpen = useStore((state) => state.setTradeOpen)
@@ -38,6 +39,13 @@ export function Trade() {
                 className="w-16 h-16 border border-zinc-800 rounded-lg"
               />
             </div>
+            <button
+              onClick={() => {
+                Rune.actions.tradeFruit({ playerId, exchangedFruit: desiredFruit, forFruit: offeredFruit })
+              }}
+            >
+              Trade 1
+            </button>
 
             <Inventory />
           </div>

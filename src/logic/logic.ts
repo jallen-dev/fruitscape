@@ -1,9 +1,9 @@
 import type { PlayerId, RuneClient } from "rune-games-sdk/multiplayer"
 import { ALL_CHARACTER_TYPES } from "../models/Character"
 import { Player } from "./Player"
-import { ALL_FRUIT_TYPES } from "../models/Fruit"
+import { FruitType } from "../models/Fruit"
 import { MAP_WIDTH, MAP_HEIGHT } from "../constants"
-import { generateNPCs } from "../utils"
+import { generateFruit, generateNPCs } from "../utils"
 import { Npc } from "../models/Npc"
 
 export interface GameState {
@@ -15,6 +15,7 @@ export interface GameState {
 type GameActions = {
   increment: (params: { amount: number }) => void
   setDestination: (params: { playerId: string; destination: { x: number; y: number } }) => void
+  tradeFruit: (params: { playerId: string; exchangedFruit: FruitType; forFruit: FruitType }) => void
 }
 
 declare global {
@@ -29,10 +30,12 @@ Rune.initLogic({
   minPlayers: 1,
   maxPlayers: 4,
   setup: (allPlayerIds): GameState => {
+    const startingFruits = generateFruit(4)
+
     return {
       count: 0,
       players: allPlayerIds.reduce((acc, playerId, index) => {
-        const randomFruit = ALL_FRUIT_TYPES[Math.floor(Math.random() * ALL_FRUIT_TYPES.length)]
+        const randomFruit = startingFruits[Math.floor(Math.random() * startingFruits.length)]
         acc[playerId] = {
           playerId,
           location: locationForIndex(index),
@@ -43,7 +46,7 @@ Rune.initLogic({
         }
         return acc
       }, {} as Record<PlayerId, Player>),
-      npcs: generateNPCs(),
+      npcs: generateNPCs(startingFruits),
     }
   },
   update: ({ game }) => {
@@ -72,6 +75,20 @@ Rune.initLogic({
     },
     setDestination: ({ playerId, destination }, { game }) => {
       game.players[playerId].destination = destination
+    },
+    tradeFruit: ({ playerId, exchangedFruit, forFruit }, { game }) => {
+      const player = game.players[playerId]
+      if (!player.inventory[exchangedFruit]) {
+        return
+      }
+      if (!player.inventory[forFruit]) {
+        player.inventory[forFruit] = 0
+      }
+      player.inventory[exchangedFruit]! -= 1
+      if (player.inventory[exchangedFruit] === 0) {
+        delete player.inventory[exchangedFruit]
+      }
+      player.inventory[forFruit] = (player.inventory[forFruit] ?? 0) + 1
     },
   },
   updatesPerSecond: 8,
