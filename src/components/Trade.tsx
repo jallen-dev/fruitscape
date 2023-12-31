@@ -6,11 +6,12 @@ import { Dialog } from "./Dialog"
 
 export function Trade() {
   const playerId = useStore((state) => state.yourPlayerId)
+  const inventory = useStore((state) => state.game?.players[playerId]?.inventory)
   const tradeOpen = useStore((state) => state.tradeOpen)
   const tradePartner = useStore((state) => state.tradePartner)
   const setTradeOpen = useStore((state) => state.setTradeOpen)
 
-  if (!tradeOpen || !tradePartner) {
+  if (!tradeOpen || !tradePartner || !inventory) {
     return null
   }
 
@@ -35,13 +36,15 @@ export function Trade() {
           className="w-16 h-16 border border-zinc-800 rounded-lg"
         />
       </div>
-      <button
-        onClick={() => {
-          Rune.actions.tradeFruit({ playerId, exchangedFruit: desiredFruit, forFruit: offeredFruit })
-        }}
-      >
-        Trade 1
-      </button>
+      {Object.keys(inventory).includes(desiredFruit) && (
+        <button
+          onClick={() => {
+            Rune.actions.tradeFruit({ playerId, exchangedFruit: desiredFruit, forFruit: offeredFruit })
+          }}
+        >
+          Trade 1
+        </button>
+      )}
 
       <Inventory />
     </Dialog>
