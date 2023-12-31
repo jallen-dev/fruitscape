@@ -1,23 +1,23 @@
-import { Sprite } from "@pixi/react";
-import { useStore } from "../store";
+import { Sprite } from "@pixi/react"
+import { useStore } from "../store"
 
 export function LocationMarker({ location }: { location?: { x: number; y: number } }) {
-  const game = useStore((state) => state.game);
-  const loaded = useStore((state) => state.loaded);
-  const playerId = useStore((state) => state.yourPlayerId);
+  const game = useStore((state) => state.game)
+  const loaded = useStore((state) => state.loaded)
+  const playerId = useStore((state) => state.yourPlayerId)
 
   if (!loaded || !game) {
-    return null;
+    return null
   }
 
-  const player = game.players[playerId];
+  const player = game.players[playerId]
 
   if (!player) {
-    return null;
+    return null
   }
 
   if (player.location.x === player.destination.x && player.location.y === player.destination.y) {
-    return null;
+    return null
   }
 
   return (
@@ -28,5 +28,5 @@ export function LocationMarker({ location }: { location?: { x: number; y: number
       anchor={{ x: 0, y: 0 }}
       scale={2}
     />
-  );
+  )
 }

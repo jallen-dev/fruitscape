@@ -1,33 +1,33 @@
-import { Container, PixiRef, Sprite, Stage, useApp } from "@pixi/react";
-import { Texture } from "@pixi/core";
-import "@pixi/events";
+import { Container, PixiRef, Sprite, Stage, useApp } from "@pixi/react"
+import { Texture } from "@pixi/core"
+import "@pixi/events"
 
-import { Background } from "./Background";
-import { useRef, useState } from "react";
-import { useStore } from "../store";
-import { Character } from "./Character";
-import { LocationMarker } from "./LocationMarker";
+import { Background } from "./Background"
+import { useRef, useState } from "react"
+import { useStore } from "../store"
+import { Character } from "./Character"
+import { LocationMarker } from "./LocationMarker"
 
-type IContainer = PixiRef<typeof Container>;
+type IContainer = PixiRef<typeof Container>
 
 export function ScrollingBackground() {
-  const containerRef = useRef<IContainer>(null);
-  const game = useStore((state) => state.game);
-  const players = useStore((state) => state.players);
-  const yourPlayerId = useStore((state) => state.yourPlayerId);
+  const containerRef = useRef<IContainer>(null)
+  const game = useStore((state) => state.game)
+  const players = useStore((state) => state.players)
+  const yourPlayerId = useStore((state) => state.yourPlayerId)
 
-  const app = useApp();
-  app.resizeTo = window;
-  const width = app.screen.width;
-  const height = app.screen.height;
+  const app = useApp()
+  app.resizeTo = window
+  const width = app.screen.width
+  const height = app.screen.height
 
-  const player = game?.players[yourPlayerId];
+  const player = game?.players[yourPlayerId]
 
-  const HALF_TILE = 16;
-  const x = player ? -player.location.x * 32 + width / 2 - HALF_TILE : 0;
-  const y = player ? -player.location.y * 32 + height / 2 : 0;
+  const HALF_TILE = 16
+  const x = player ? -player.location.x * 32 + width / 2 - HALF_TILE : 0
+  const y = player ? -player.location.y * 32 + height / 2 : 0
 
-  const otherPlayers = Object.values(game?.players ?? {}).filter((player) => player.playerId !== yourPlayerId);
+  const otherPlayers = Object.values(game?.players ?? {}).filter((player) => player.playerId !== yourPlayerId)
 
   return (
     <>
@@ -53,15 +53,15 @@ export function ScrollingBackground() {
         interactive={true}
         pointerdown={(event) => {
           if (!player) {
-            return;
+            return
           }
 
-          const xTiles = Math.floor((event.screen.x - width / 2 + HALF_TILE) / 32);
-          const yTiles = Math.floor((event.screen.y - height / 2) / 32);
-          const nextCoords = [player.location.x + xTiles, player.location.y + yTiles];
-          Rune.actions.setDestination({ playerId: yourPlayerId, destination: { x: nextCoords[0], y: nextCoords[1] } });
+          const xTiles = Math.floor((event.screen.x - width / 2 + HALF_TILE) / 32)
+          const yTiles = Math.floor((event.screen.y - height / 2) / 32)
+          const nextCoords = [player.location.x + xTiles, player.location.y + yTiles]
+          Rune.actions.setDestination({ playerId: yourPlayerId, destination: { x: nextCoords[0], y: nextCoords[1] } })
         }}
       />
     </>
-  );
+  )
 }

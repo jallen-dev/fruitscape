@@ -23,7 +23,7 @@ export enum FruitType {
   Cantaloupe = "Cantaloupe",
 }
 
-export const ALL_FRUIT_TYPES = Object.values(FruitType);
+export const ALL_FRUIT_TYPES = Object.values(FruitType)
 
 export const FRUIT_IMAGES: Record<FruitType, string> = {
   [FruitType.RedCherry]: "red-cherry.png",
@@ -48,4 +48,4 @@ export const FRUIT_IMAGES: Record<FruitType, string> = {
   [FruitType.Strawberry]: "strawberry.png",
   [FruitType.Watermelon]: "watermelon.png",
   [FruitType.Cantaloupe]: "cantaloupe.png",
-};
+}

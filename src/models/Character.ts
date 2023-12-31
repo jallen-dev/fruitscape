@@ -14,7 +14,7 @@ export enum CharacterType {
   Archer = "Archer",
 }
 
-export const ALL_CHARACTER_TYPES = Object.values(CharacterType);
+export const ALL_CHARACTER_TYPES = Object.values(CharacterType)
 
 export const CHARACTER_IMAGES: Record<CharacterType, string> = {
   [CharacterType.Wizard]: "set2/tile_0084.png",
@@ -30,4 +30,4 @@ export const CHARACTER_IMAGES: Record<CharacterType, string> = {
   [CharacterType.Cyclops]: "set2/tile_0109.png",
   [CharacterType.DarkWizard]: "set2/tile_0111.png",
   [CharacterType.Archer]: "set2/tile_0112.png",
-};
+}
