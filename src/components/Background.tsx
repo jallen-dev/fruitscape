@@ -2,13 +2,12 @@ import { Container } from "@pixi/react"
 
 import { TileMap } from "./TileMap"
 import { useStore } from "../store"
+import { background, objects } from "../assets/maps"
 
 export function Background() {
   const tileNames = useStore((state) => state.tileNames)
-  const background = useStore((state) => state.game?.background)
-  const objects = useStore((state) => state.game?.objects)
 
-  if (!tileNames || !background || !objects) {
+  if (!tileNames) {
     return null
   }
 

@@ -24,7 +24,8 @@ function App() {
     })
 
     load().then((sheet) => {
-      useStore.getState().setTileNames(Object.keys(sheet))
+      // 0 represents an empty tile so put "null" at the beginning of the list
+      useStore.getState().setTileNames(["null", ...Object.keys(sheet)])
       useStore.getState().setLoaded(true)
     })
   }, [])

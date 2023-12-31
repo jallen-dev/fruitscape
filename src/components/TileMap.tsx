@@ -1,7 +1,8 @@
 import { PixiComponent } from "@pixi/react"
 import { CompositeTilemap } from "@pixi/tilemap"
 import { DisplayObject } from "pixi.js"
-import { TileMapData } from "../maps"
+
+type TileMapData = number[]
 
 type TileMapProps = {
   layers: TileMapData[]
@@ -23,13 +24,20 @@ export const TileMap = PixiComponent<TileMapProps, DisplayObject>("TileMap", {
   },
 })
 
-function drawLayers(tileMap: CompositeTilemap, layers: TileMapData[], tileNames: string[], tileWidth = 16) {
+function drawLayers(
+  tileMap: CompositeTilemap,
+  layers: TileMapData[],
+  tileNames: string[],
+  tileWidth = 16,
+  mapWidth = 30
+) {
   tileMap.clear()
   for (const layer of layers) {
-    for (let y = 0; y < layer.length; y++) {
-      for (let x = 0; x < layer[y].length; x++) {
-        const tile = layer[y][x]
-        if (tile === undefined) {
+    const mapHeight = layer.length / mapWidth
+    for (let y = 0; y < mapHeight; y++) {
+      for (let x = 0; x < mapWidth; x++) {
+        const tile = layer[y * mapWidth + x]
+        if (tile === 0) {
           continue
         }
         tileMap.tile(tileNames[tile], x * tileWidth, y * tileWidth)

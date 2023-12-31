@@ -3,15 +3,13 @@ import { ALL_CHARACTER_TYPES } from "../models/Character"
 import { Player } from "./Player"
 import { ALL_FRUIT_TYPES } from "../models/Fruit"
 import { MAP_WIDTH, MAP_HEIGHT } from "../constants"
-import { TileMapData, generateNPCs, generateBackground, generateObjects } from "../utils"
+import { generateNPCs } from "../utils"
 import { Npc } from "../models/Npc"
 
 export interface GameState {
   count: number
   players: Record<PlayerId, Player>
   npcs: Record<string, Npc>
-  background: TileMapData
-  objects: TileMapData
 }
 
 type GameActions = {
@@ -46,8 +44,6 @@ Rune.initLogic({
         return acc
       }, {} as Record<PlayerId, Player>),
       npcs: generateNPCs(),
-      background: generateBackground(),
-      objects: generateObjects(),
     }
   },
   update: ({ game }) => {
