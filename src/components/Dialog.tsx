@@ -7,8 +7,7 @@ export function Dialog({ children, onCloseDialog }: { children: React.ReactNode;
       <RadixDialog.Portal>
         <RadixDialog.Overlay className="bg-black w-full h-full absolute opacity-50" onClick={onCloseDialog} />
         <RadixDialog.Content className="absolute top-1/2 left-1/2 w-5/6 h-5/6 bg-amber-200 -translate-x-1/2 -translate-y-1/2 rounded-md p-2">
-          {children}
-
+          <div className="flex flex-col items-center place-content-between h-full pt-12">{children}</div>
           <RadixDialog.Close asChild>
             <button className="absolute right-1 top-1" aria-label="Close" onClick={onCloseDialog}>
               <Cross2Icon />

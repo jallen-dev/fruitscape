@@ -22,30 +22,28 @@ export function Trade() {
 
   return (
     <Dialog onCloseDialog={() => setTradeOpen(false)}>
-      <div className="flex flex-col items-center place-content-between h-full pt-12">
-        <div className="flex gap-2 items-center">
-          <img
-            src={FRUIT_IMAGES[desiredFruit]}
-            alt={desiredFruit}
-            className="w-16 h-16 border border-zinc-800 rounded-lg"
-          />
-          <ArrowRightIcon />
-          <img
-            src={FRUIT_IMAGES[offeredFruit]}
-            alt={offeredFruit}
-            className="w-16 h-16 border border-zinc-800 rounded-lg"
-          />
-        </div>
-        <button
-          onClick={() => {
-            Rune.actions.tradeFruit({ playerId, exchangedFruit: desiredFruit, forFruit: offeredFruit })
-          }}
-        >
-          Trade 1
-        </button>
-
-        <Inventory />
+      <div className="flex gap-2 items-center">
+        <img
+          src={FRUIT_IMAGES[desiredFruit]}
+          alt={desiredFruit}
+          className="w-16 h-16 border border-zinc-800 rounded-lg"
+        />
+        <ArrowRightIcon />
+        <img
+          src={FRUIT_IMAGES[offeredFruit]}
+          alt={offeredFruit}
+          className="w-16 h-16 border border-zinc-800 rounded-lg"
+        />
       </div>
+      <button
+        onClick={() => {
+          Rune.actions.tradeFruit({ playerId, exchangedFruit: desiredFruit, forFruit: offeredFruit })
+        }}
+      >
+        Trade 1
+      </button>
+
+      <Inventory />
     </Dialog>
   )
 }
