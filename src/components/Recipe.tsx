@@ -6,12 +6,12 @@ import { Inventory } from "./Inventory"
 import { CheckIcon } from "@radix-ui/react-icons"
 
 export function Recipe() {
-  const currentRecipe = useStore((state) => state.game?.currentRecipe)
-  const contributedIngredients = useStore((state) => state.game?.contributedIngredients)
+  const currentRecipe = useStore((state) => state.game.currentRecipe)
+  const contributedIngredients = useStore((state) => state.game.contributedIngredients)
   const recipeOpen = useStore((state) => state.recipeOpen)
   const setRecipeOpen = useStore((state) => state.setRecipeOpen)
 
-  if (!recipeOpen || !currentRecipe || !contributedIngredients) {
+  if (!recipeOpen || !contributedIngredients) {
     return null
   }
 
@@ -52,11 +52,7 @@ export function Recipe() {
 
 function UnSatisfiedIngredient({ fruit, quantity }: { fruit: FruitType; quantity: number }) {
   const playerId = useStore((state) => state.yourPlayerId)
-  const inventory = useStore((state) => state.game?.players[playerId].inventory) ?? {}
-
-  if (!inventory) {
-    return null
-  }
+  const inventory = useStore((state) => state.game.players[playerId].inventory)
 
   return (
     <div className="relative">

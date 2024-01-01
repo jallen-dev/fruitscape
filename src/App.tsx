@@ -34,7 +34,7 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = useStore.subscribe(
-      (state) => state.game?.players[playerId],
+      (state) => state.game.players[playerId],
       (player) => {
         if (player && player.location.x === player.destination.x && player.location.y === player.destination.y) {
           // player has reached their destination.
@@ -45,7 +45,7 @@ function App() {
           }
 
           // check if there's an NPC there
-          for (const npc of Object.values(useStore.getState().game?.npcs ?? {})) {
+          for (const npc of Object.values(useStore.getState().game.npcs)) {
             if (npc.location.x === player.location.x && npc.location.y === player.location.y) {
               useStore.getState().setTradeOpen(true)
               useStore.getState().setTradePartner(npc.id)

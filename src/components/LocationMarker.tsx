@@ -1,12 +1,12 @@
 import { Sprite } from "@pixi/react"
 import { useStore } from "../store"
 
-export function LocationMarker({ location }: { location?: { x: number; y: number } }) {
+export function LocationMarker() {
   const game = useStore((state) => state.game)
   const loaded = useStore((state) => state.loaded)
   const playerId = useStore((state) => state.yourPlayerId)
 
-  if (!loaded || !game) {
+  if (!loaded) {
     return null
   }
 

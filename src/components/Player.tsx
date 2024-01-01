@@ -6,17 +6,13 @@ export function Player() {
   const players = useStore((state) => state.players)
   const playerId = useStore((state) => state.yourPlayerId)
 
-  if (!game) {
-    return null
-  }
-
   const player = game.players[playerId]
 
   if (!player) {
     return null
   }
 
-  const playerInfo = players?.[playerId]
+  const playerInfo = players[playerId]
 
-  return <Character character={player.character} name={playerInfo?.displayName} />
+  return <Character character={player.character} name={playerInfo.displayName} />
 }

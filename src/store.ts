@@ -5,8 +5,8 @@ import { subscribeWithSelector } from "zustand/middleware"
 
 interface State {
   tileNames?: string[]
-  game?: GameState
-  players?: Record<PlayerId, Player>
+  game: GameState
+  players: Record<PlayerId, Player>
   yourPlayerId: string
   destination?: { x: number; y: number }
   loaded: boolean
@@ -33,6 +33,14 @@ export const useStore = create<State & Actions>()(
     loaded: false,
     tradeOpen: false,
     recipeOpen: false,
+    players: {},
+    game: {
+      count: 0,
+      players: {},
+      npcs: {},
+      currentRecipe: {},
+      contributedIngredients: {},
+    },
     setTileNames: (tileNames) => set({ tileNames }),
     setGame: (game) => set({ game }),
     setPlayers: (players) => set({ players }),

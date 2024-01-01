@@ -5,7 +5,7 @@ import { FruitQuantity } from "./FruitQuantity"
 const MAX_INVENTORY_SIZE = 8
 
 export function Inventory() {
-  const inventory = useStore((state) => state.game?.players[state.yourPlayerId].inventory) ?? {}
+  const inventory = useStore((state) => state.game.players[state.yourPlayerId].inventory)
   const numItems = Object.values(inventory).length
   const emptySlots = Array.from({ length: MAX_INVENTORY_SIZE - numItems })
 

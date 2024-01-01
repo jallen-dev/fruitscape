@@ -1,25 +1,21 @@
 import { useStore } from "../store"
 import { ArrowRightIcon } from "@radix-ui/react-icons"
-import { FRUIT_IMAGES, FruitType } from "../models/Fruit"
+import { FRUIT_IMAGES } from "../models/Fruit"
 import { Inventory } from "./Inventory"
 import { Dialog } from "./Dialog"
 
 export function Trade() {
   const playerId = useStore((state) => state.yourPlayerId)
-  const inventory = useStore((state) => state.game?.players[playerId]?.inventory)
+  const inventory = useStore((state) => state.game.players[playerId]?.inventory)
   const tradeOpen = useStore((state) => state.tradeOpen)
   const tradePartner = useStore((state) => state.tradePartner)
   const setTradeOpen = useStore((state) => state.setTradeOpen)
 
-  if (!tradeOpen || !tradePartner || !inventory) {
+  if (!tradeOpen || !tradePartner) {
     return null
   }
 
-  // TODO: make game not nullable
-  const { offeredFruit, desiredFruit } = useStore.getState().game?.npcs[tradePartner] ?? {
-    offeredFruit: FruitType.Apple,
-    desiredFruit: FruitType.Apple,
-  }
+  const { offeredFruit, desiredFruit } = useStore.getState().game.npcs[tradePartner]
 
   return (
     <Dialog title="Trade" onCloseDialog={() => setTradeOpen(false)}>
