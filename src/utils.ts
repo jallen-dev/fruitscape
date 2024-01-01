@@ -1,4 +1,4 @@
-import { MAP_HEIGHT, MAP_WIDTH } from "./constants"
+import { MAP_WIDTH } from "./constants"
 import { ALL_CHARACTER_TYPES } from "./models/Character"
 import { ALL_FRUIT_TYPES, FruitType } from "./models/Fruit"
 import { Npc } from "./models/Npc"
@@ -6,7 +6,7 @@ import { npcs as npcsMap } from "./assets/maps"
 
 export function generateFruit(numFruit = 10) {
   // shuffle all fruits
-  const shuffledFruits = ALL_FRUIT_TYPES.sort(() => 0.5 - Math.random())
+  const shuffledFruits = shuffle([...ALL_FRUIT_TYPES])
   return shuffledFruits.slice(0, numFruit)
 }
 
@@ -41,10 +41,26 @@ export function generateNPCs(fruits: FruitType[]) {
   return npcs
 }
 
-export function generateRecipe(fruits: FruitType[], numIngredients = 3) {
-  const shuffledFruits = fruits.sort(() => 0.5 - Math.random())
-  return shuffledFruits.slice(0, numIngredients).reduce((acc, fruit) => {
+export function generateRecipe(fruits: FruitType[]) {
+  return fruits.reduce((acc, fruit) => {
     acc[fruit] = (acc[fruit] || 0) + 1
     return acc
   }, {} as Partial<Record<FruitType, number>>)
+}
+
+function shuffle<T>(array: T[]) {
+  let currentIndex = array.length,
+    randomIndex
+
+  // While there remain elements to shuffle.
+  while (currentIndex > 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex--
+
+    // And swap it with the current element.
+    ;[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]]
+  }
+
+  return array
 }

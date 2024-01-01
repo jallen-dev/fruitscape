@@ -19,6 +19,7 @@ type GameActions = {
   setDestination: (params: { playerId: string; destination: { x: number; y: number } }) => void
   addFruit: (params: { playerId: string; fruit: FruitType }) => void
   tradeFruit: (params: { playerId: string; exchangedFruit: FruitType; forFruit: FruitType }) => void
+  completeRecipe: (params: { playerId: string }) => void
 }
 
 declare global {
@@ -50,7 +51,7 @@ Rune.initLogic({
         return acc
       }, {} as Record<PlayerId, Player>),
       npcs: generateNPCs(startingFruits),
-      currentRecipe: generateRecipe(startingFruits, 3),
+      currentRecipe: generateRecipe(startingFruits),
       contributedIngredients: {},
     }
   },
@@ -106,6 +107,25 @@ Rune.initLogic({
         delete player.inventory[exchangedFruit]
       }
       player.inventory[forFruit] = (player.inventory[forFruit] ?? 0) + 1
+    },
+    completeRecipe: ({ playerId }, { game }) => {
+      console.log(playerId, "completed recipe")
+      const recipe = game.currentRecipe
+      const contributedIngredients = game.contributedIngredients
+
+      // check if all the ingredients of the currentRecipe are in the contributedIngredients
+      for (const [fruit, amount] of Object.entries(recipe)) {
+        if (amount > (contributedIngredients[fruit as FruitType] ?? 0)) {
+          return
+        }
+      }
+
+      // generate a new recipe
+      const numIngredients = Object.keys(recipe).length + 1
+      const newFruits = generateFruit(numIngredients)
+      const newRecipe = generateRecipe(newFruits)
+      game.currentRecipe = newRecipe
+      game.contributedIngredients = {}
     },
   },
   updatesPerSecond: 8,

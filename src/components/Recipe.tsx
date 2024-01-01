@@ -29,14 +29,21 @@ export function Recipe() {
     <Dialog title="Contribute Fruit" onCloseDialog={() => setRecipeOpen(false)}>
       <div className={`grid ${gridCols} gap-2 w-full`}>
         {unSatisfiedIngredients.map(([fruitType, quantity]) => (
-          <UnSatisfiedIngredient fruit={fruitType as FruitType} quantity={quantity} />
+          <UnSatisfiedIngredient fruit={fruitType as FruitType} quantity={quantity} key={fruitType} />
         ))}
         {satisfiedIngredients.map(([fruitType, quantity]) => (
-          <SatisfiedIngredient fruit={fruitType as FruitType} />
+          <SatisfiedIngredient fruit={fruitType as FruitType} key={fruitType} />
         ))}
       </div>
       {unSatisfiedIngredients.length === 0 && (
-        <button className="bg-blue-600 text-white rounded-md px-4 py-2">Complete</button>
+        <button
+          className="bg-blue-600 text-white rounded-md px-4 py-2"
+          onClick={() => {
+            Rune.actions.completeRecipe({ playerId: useStore.getState().yourPlayerId })
+          }}
+        >
+          Complete
+        </button>
       )}
       <Inventory />
     </Dialog>
