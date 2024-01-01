@@ -17,6 +17,9 @@ function App() {
   const setYourPlayerId = useStore((state) => state.setYourPlayerId)
 
   useEffect(() => {
+    if (useStore.getState().initialized) {
+      return
+    }
     Rune.initClient({
       onChange: ({ game, yourPlayerId, players }) => {
         setGame(game)
@@ -28,8 +31,9 @@ function App() {
     load().then((sheet) => {
       // 0 represents an empty tile so put "null" at the beginning of the list
       useStore.getState().setTileNames(["null", ...Object.keys(sheet)])
-      useStore.getState().setLoaded(true)
+      useStore.getState().setAssetsLoaded(true)
     })
+    useStore.getState().setInitialized(true)
   }, [])
 
   useEffect(() => {

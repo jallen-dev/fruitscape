@@ -13,9 +13,9 @@ export function Character({
   name?: string
 }) {
   const app = useApp()
-  const loaded = useStore((state) => state.loaded)
+  const assetsLoaded = useStore((state) => state.assetsLoaded)
 
-  if (!loaded) {
+  if (!assetsLoaded) {
     return null
   }
 

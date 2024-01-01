@@ -3,10 +3,10 @@ import { useStore } from "../store"
 
 export function LocationMarker() {
   const game = useStore((state) => state.game)
-  const loaded = useStore((state) => state.loaded)
+  const assetsLoaded = useStore((state) => state.assetsLoaded)
   const playerId = useStore((state) => state.yourPlayerId)
 
-  if (!loaded) {
+  if (!assetsLoaded) {
     return null
   }
 
