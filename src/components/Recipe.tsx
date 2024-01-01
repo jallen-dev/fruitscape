@@ -26,7 +26,7 @@ export function Recipe() {
   )
 
   return (
-    <Dialog onCloseDialog={() => setRecipeOpen(false)}>
+    <Dialog title="Contribute Fruit" onCloseDialog={() => setRecipeOpen(false)}>
       <div className={`grid ${gridCols} gap-2 w-full`}>
         {unSatisfiedIngredients.map(([fruitType, quantity]) => (
           <UnSatisfiedIngredient fruit={fruitType as FruitType} quantity={quantity} />
@@ -35,7 +35,9 @@ export function Recipe() {
           <SatisfiedIngredient fruit={fruitType as FruitType} />
         ))}
       </div>
-      {unSatisfiedIngredients.length === 0 && <button>Build</button>}
+      {unSatisfiedIngredients.length === 0 && (
+        <button className="bg-blue-600 text-white rounded-md px-4 py-2">Complete</button>
+      )}
       <Inventory />
     </Dialog>
   )

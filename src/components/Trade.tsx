@@ -22,7 +22,7 @@ export function Trade() {
   }
 
   return (
-    <Dialog onCloseDialog={() => setTradeOpen(false)}>
+    <Dialog title="Trade" onCloseDialog={() => setTradeOpen(false)}>
       <div className="flex gap-2 items-center">
         <img
           src={FRUIT_IMAGES[desiredFruit]}
@@ -38,6 +38,7 @@ export function Trade() {
       </div>
       {Object.keys(inventory).includes(desiredFruit) && (
         <button
+          className="bg-blue-600 text-white rounded-md px-4 py-2"
           onClick={() => {
             Rune.actions.tradeFruit({ playerId, exchangedFruit: desiredFruit, forFruit: offeredFruit })
           }}
