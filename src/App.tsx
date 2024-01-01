@@ -10,7 +10,6 @@ import { MAP_HEIGHT, MAP_WIDTH } from "./constants.ts"
 import { Recipe } from "./components/Recipe.tsx"
 
 function App() {
-  const game = useStore((state) => state.game)
   const playerId = useStore((state) => state.yourPlayerId)
   const setGame = useStore((state) => state.setGame)
   const setPlayers = useStore((state) => state.setPlayers)
@@ -62,10 +61,6 @@ function App() {
 
     return unsubscribe
   }, [playerId])
-
-  if (!game) {
-    return <div>Loading...</div>
-  }
 
   return (
     <div>
