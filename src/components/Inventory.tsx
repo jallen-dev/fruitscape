@@ -10,7 +10,7 @@ export function Inventory() {
   const emptySlots = Array.from({ length: MAX_INVENTORY_SIZE - numItems })
 
   return (
-    <div>
+    <div className="w-full">
       <div className="text-xl mb-1">Inventory</div>
       <div className="grid grid-cols-4 gap-2 w-full">
         {Object.entries(inventory).map(([fruitType, quantity]) => (
