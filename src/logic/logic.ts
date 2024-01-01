@@ -11,11 +11,13 @@ export interface GameState {
   players: Record<PlayerId, Player>
   npcs: Record<string, Npc>
   currentRecipe: Partial<Record<FruitType, number>>
+  contributedIngredients: Partial<Record<FruitType, number>>
 }
 
 type GameActions = {
   increment: (params: { amount: number }) => void
   setDestination: (params: { playerId: string; destination: { x: number; y: number } }) => void
+  addFruit: (params: { playerId: string; fruit: FruitType }) => void
   tradeFruit: (params: { playerId: string; exchangedFruit: FruitType; forFruit: FruitType }) => void
 }
 
@@ -49,6 +51,7 @@ Rune.initLogic({
       }, {} as Record<PlayerId, Player>),
       npcs: generateNPCs(startingFruits),
       currentRecipe: generateRecipe(startingFruits, 3),
+      contributedIngredients: {},
     }
   },
   update: ({ game }) => {
@@ -77,6 +80,18 @@ Rune.initLogic({
     },
     setDestination: ({ playerId, destination }, { game }) => {
       game.players[playerId].destination = destination
+    },
+    addFruit: ({ playerId, fruit }, { game }) => {
+      if (!game.players[playerId].inventory[fruit]) {
+        return
+      }
+
+      game.players[playerId].inventory[fruit]! -= 1
+      if (game.players[playerId].inventory[fruit] === 0) {
+        delete game.players[playerId].inventory[fruit]
+      }
+
+      game.contributedIngredients[fruit] = (game.contributedIngredients[fruit] ?? 0) + 1
     },
     tradeFruit: ({ playerId, exchangedFruit, forFruit }, { game }) => {
       const player = game.players[playerId]
