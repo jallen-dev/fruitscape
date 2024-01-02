@@ -6,7 +6,7 @@ import { Background } from "./Background"
 import { useStore } from "../store"
 import { Character } from "./Character"
 import { LocationMarker } from "./LocationMarker"
-import { MAP_HEIGHT, MAP_WIDTH } from "../constants"
+import { BOTTOM_BOUNDS, LEFT_BOUNDS, MAP_HEIGHT, MAP_WIDTH, RIGHT_BOUNDS, TOP_BOUNDS } from "../constants"
 
 export function ScrollingBackground() {
   const game = useStore((state) => state.game)
@@ -54,8 +54,8 @@ export function ScrollingBackground() {
           const xTiles = Math.floor((event.screen.x - width / 2 + HALF_TILE) / 32)
           const yTiles = Math.floor((event.screen.y - height / 2) / 32)
           const nextCoords = [
-            Math.min(MAP_WIDTH - 1, Math.max(0, player.location.x + xTiles)),
-            Math.min(MAP_HEIGHT - 1, Math.max(0, player.location.y + yTiles)),
+            Math.min(RIGHT_BOUNDS, Math.max(LEFT_BOUNDS, player.location.x + xTiles)),
+            Math.min(BOTTOM_BOUNDS, Math.max(TOP_BOUNDS, player.location.y + yTiles)),
           ]
           if (obstacleMap[nextCoords[1]][nextCoords[0]]) {
             // tile is an obstacle. Perform a BFS to find the nearest non-obstacle tile

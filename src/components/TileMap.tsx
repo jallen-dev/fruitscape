@@ -1,6 +1,7 @@
 import { PixiComponent } from "@pixi/react"
 import { CompositeTilemap } from "@pixi/tilemap"
 import { DisplayObject } from "pixi.js"
+import { MAP_WIDTH } from "../constants"
 
 type TileMapData = number[]
 
@@ -29,7 +30,7 @@ function drawLayers(
   layers: TileMapData[],
   tileNames: string[],
   tileWidth = 16,
-  mapWidth = 30
+  mapWidth = MAP_WIDTH
 ) {
   tileMap.clear()
   for (const layer of layers) {
