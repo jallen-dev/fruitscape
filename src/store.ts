@@ -43,6 +43,8 @@ export const useStore = create<State & Actions>()(
       npcs: {},
       currentRecipe: {},
       contributedIngredients: {},
+      events: [],
+      eventId: 0,
     },
     setTileNames: (tileNames) => set({ tileNames }),
     setGame: (game) => set({ game }),

@@ -5,6 +5,7 @@ import { FruitType } from "../models/Fruit"
 import { MAP_WIDTH, MAP_HEIGHT } from "../constants"
 import { generateFruit, generateNPCs, generateRecipe } from "../utils"
 import { Npc } from "../models/Npc"
+import { Event } from "../models/Event"
 
 export interface GameState {
   count: number
@@ -12,6 +13,8 @@ export interface GameState {
   npcs: Record<string, Npc>
   currentRecipe: Partial<Record<FruitType, number>>
   contributedIngredients: Partial<Record<FruitType, number>>
+  events: Event[]
+  eventId: number
 }
 
 type GameActions = {
@@ -53,9 +56,16 @@ Rune.initLogic({
       npcs: generateNPCs(startingFruits),
       currentRecipe: generateRecipe(startingFruits),
       contributedIngredients: {},
+      events: [],
+      eventId: 0,
     }
   },
   update: ({ game }) => {
+    // expire events
+    const now = Rune.gameTime()
+    game.events = game.events.filter((event) => now - event.time < 3000)
+
+    // move players
     for (const player of Object.values(game.players)) {
       if (player.location.x === player.destination.x && player.location.y === player.destination.y) {
         continue
@@ -93,6 +103,15 @@ Rune.initLogic({
       }
 
       game.contributedIngredients[fruit] = (game.contributedIngredients[fruit] ?? 0) + 1
+      game.events.push({
+        id: game.eventId,
+        type: "fruitAdded",
+        playerId,
+        fruit,
+        quantity: 1,
+        time: Rune.gameTime(),
+      })
+      game.eventId += 1
     },
     tradeFruit: ({ playerId, exchangedFruit, forFruit }, { game }) => {
       const player = game.players[playerId]

@@ -8,6 +8,7 @@ import { Player } from "./components/Player.tsx"
 import { Trade } from "./components/Trade.tsx"
 import { MAP_HEIGHT, MAP_WIDTH } from "./constants.ts"
 import { Recipe } from "./components/Recipe.tsx"
+import { EventLog } from "./components/EventLog.tsx"
 
 function App() {
   const playerId = useStore((state) => state.yourPlayerId)
@@ -70,6 +71,7 @@ function App() {
       </Stage>
       <Trade />
       <Recipe />
+      <EventLog />
     </div>
   )
 }
