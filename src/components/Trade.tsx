@@ -4,6 +4,8 @@ import { FRUIT_IMAGES } from "../models/Fruit"
 import { Inventory } from "./Inventory"
 import { Dialog } from "./Dialog"
 
+// TODO: there's a bug where if the player is standing on an NPC with the trade dialog closed,
+// and their inventory is updated (because there's a new recipe and they got a new fruit), the trade dialog will open.
 export function Trade() {
   const playerId = useStore((state) => state.yourPlayerId)
   const inventory = useStore((state) => state.game.players[playerId]?.inventory)

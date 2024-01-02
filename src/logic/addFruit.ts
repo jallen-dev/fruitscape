@@ -62,4 +62,25 @@ function generateNewRecipe(game: GameState) {
     time: Rune.gameTime(),
   })
   game.eventId += 1
+
+  givePlayersMoreFruit(game)
+}
+
+function givePlayersMoreFruit(game: GameState) {
+  for (const player of Object.values(game.players)) {
+    const newFruits = generateFruit(1)
+    for (const fruit of newFruits) {
+      player.inventory[fruit] = (player.inventory[fruit] ?? 0) + 10
+      // TODO: maybe extract event generation to a function
+      game.events.push({
+        id: game.eventId,
+        type: "fruitGranted",
+        playerId: player.playerId,
+        fruit,
+        quantity: 10,
+        time: Rune.gameTime(),
+      })
+      game.eventId += 1
+    }
+  }
 }

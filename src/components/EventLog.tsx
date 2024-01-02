@@ -26,5 +26,12 @@ function EventLogItem({ event }: { event: Event }) {
     case "recipeCompleted": {
       return <div>Recipe complete!</div>
     }
+    case "fruitGranted": {
+      return (
+        <div>
+          {players[event.playerId].displayName} got {event.quantity} {event.fruit}!
+        </div>
+      )
+    }
   }
 }

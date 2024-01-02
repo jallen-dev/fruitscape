@@ -1,6 +1,6 @@
 import { FruitType } from "./Fruit"
 
-export type Event = FruitAddedEvent | RecipeCompletedEvent
+export type Event = FruitAddedEvent | RecipeCompletedEvent | FruitGrantedEvent
 
 type FruitAddedEvent = {
   id: number
@@ -15,4 +15,13 @@ type RecipeCompletedEvent = {
   id: number
   time: number
   type: "recipeCompleted"
+}
+
+type FruitGrantedEvent = {
+  id: number
+  time: number
+  type: "fruitGranted"
+  playerId: string
+  fruit: FruitType
+  quantity: number
 }
