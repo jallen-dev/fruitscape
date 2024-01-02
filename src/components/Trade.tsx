@@ -36,7 +36,7 @@ export function Trade() {
         <button
           className="bg-blue-600 text-white rounded-md px-4 py-2"
           onClick={() => {
-            Rune.actions.tradeFruit({ playerId, exchangedFruit: desiredFruit, forFruit: offeredFruit })
+            Rune.actions.tradeFruit({ exchangedFruit: desiredFruit, forFruit: offeredFruit })
           }}
         >
           Trade 1

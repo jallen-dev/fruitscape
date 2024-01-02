@@ -1,5 +1,5 @@
-import { CharacterType } from "../models/Character"
-import { FruitType } from "../models/Fruit"
+import { CharacterType } from "./Character"
+import { FruitType } from "./Fruit"
 
 export type Player = {
   playerId: string

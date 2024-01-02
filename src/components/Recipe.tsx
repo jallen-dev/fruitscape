@@ -50,7 +50,7 @@ function UnSatisfiedIngredient({ fruit, quantity }: { fruit: FruitType; quantity
       {Object.keys(inventory).includes(fruit) && (
         <button
           className="bg-blue-600 text-white rounded-md px-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          onClick={() => Rune.actions.addFruit({ playerId, fruit })}
+          onClick={() => Rune.actions.addFruit({ fruit })}
         >
           Add
         </button>

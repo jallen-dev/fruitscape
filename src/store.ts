@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { GameState } from "./logic/logic"
+import { GameState } from "./logic/types"
 import { Player, PlayerId } from "rune-games-sdk"
 import { subscribeWithSelector } from "zustand/middleware"
 
@@ -38,7 +38,6 @@ export const useStore = create<State & Actions>()(
     recipeOpen: false,
     players: {},
     game: {
-      count: 0,
       players: {},
       npcs: {},
       currentRecipe: {},
