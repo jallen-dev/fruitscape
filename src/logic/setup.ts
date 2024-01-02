@@ -9,11 +9,11 @@ export function setup(allPlayerIds: PlayerId[]) {
   const startingFruits = generateFruit(4)
 
   return {
-    players: allPlayerIds.reduce((acc, playerId, index) => {
+    players: allPlayerIds.reduce((acc, id, index) => {
       const startingLocation = startingLocationForPlayer(index)
       const randomFruit = startingFruits[Math.floor(Math.random() * startingFruits.length)]
-      acc[playerId] = {
-        playerId,
+      acc[id] = {
+        id,
         location: startingLocation,
         destination: startingLocation,
         character: ALL_CHARACTER_TYPES[Math.floor(Math.random() * ALL_CHARACTER_TYPES.length)],

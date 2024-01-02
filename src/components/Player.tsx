@@ -3,7 +3,7 @@ import { Character } from "./Character"
 
 export function Player() {
   const game = useStore((state) => state.game)
-  const players = useStore((state) => state.players)
+  const playerDetails = useStore((state) => state.playerDetails)
   const playerId = useStore((state) => state.yourPlayerId)
 
   const player = game.players[playerId]
@@ -12,7 +12,7 @@ export function Player() {
     return null
   }
 
-  const playerInfo = players[playerId]
+  const playerInfo = playerDetails[playerId]
 
   return <Character character={player.character} name={playerInfo.displayName} />
 }

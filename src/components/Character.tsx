@@ -19,7 +19,6 @@ export function Character({
     return null
   }
 
-  // TODO: fix this -16
   const x = location ? location.x * 32 + 16 : app.screen.width / 2
   const y = location ? location.y * 32 : app.screen.height / 2
   return (

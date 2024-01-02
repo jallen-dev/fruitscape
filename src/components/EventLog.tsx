@@ -14,12 +14,12 @@ export function EventLog() {
 }
 
 function EventLogItem({ event }: { event: Event }) {
-  const players = useStore((state) => state.players)
+  const playerDetails = useStore((state) => state.playerDetails)
   switch (event.type) {
     case "fruitAdded": {
       return (
         <div>
-          {players[event.playerId].displayName} added {event.quantity} {event.fruit}!
+          {playerDetails[event.playerId].displayName} added {event.quantity} {event.fruit}!
         </div>
       )
     }
@@ -29,7 +29,7 @@ function EventLogItem({ event }: { event: Event }) {
     case "fruitGranted": {
       return (
         <div>
-          {players[event.playerId].displayName} got {event.quantity} {event.fruit}!
+          {playerDetails[event.playerId].displayName} got {event.quantity} {event.fruit}!
         </div>
       )
     }

@@ -6,7 +6,7 @@ import { subscribeWithSelector } from "zustand/middleware"
 interface State {
   tileNames?: string[]
   game: GameState
-  players: Record<PlayerId, Player>
+  playerDetails: Record<PlayerId, Player>
   yourPlayerId: string
   destination?: { x: number; y: number }
   initialized: boolean
@@ -19,7 +19,7 @@ interface State {
 interface Actions {
   setTileNames: (tileNames: string[]) => void
   setGame: (game: GameState) => void
-  setPlayers: (players: Record<PlayerId, Player>) => void
+  setPlayerDetails: (playerDetails: Record<PlayerId, Player>) => void
   setYourPlayerId: (yourPlayerId: string) => void
   setInitialized: (initialized: boolean) => void
   setAssetsLoaded: (loaded: boolean) => void
@@ -36,7 +36,7 @@ export const useStore = create<State & Actions>()(
     assetsLoaded: false,
     tradeOpen: false,
     recipeOpen: false,
-    players: {},
+    playerDetails: {},
     game: {
       players: {},
       npcs: {},
@@ -47,7 +47,7 @@ export const useStore = create<State & Actions>()(
     },
     setTileNames: (tileNames) => set({ tileNames }),
     setGame: (game) => set({ game }),
-    setPlayers: (players) => set({ players }),
+    setPlayerDetails: (playerDetails) => set({ playerDetails }),
     setYourPlayerId: (yourPlayerId) => set({ yourPlayerId }),
     setInitialized: (initialized) => set({ initialized }),
     setAssetsLoaded: (assetsLoaded) => set({ assetsLoaded }),

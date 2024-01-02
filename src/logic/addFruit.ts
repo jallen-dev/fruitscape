@@ -75,7 +75,7 @@ function givePlayersMoreFruit(game: GameState) {
       game.events.push({
         id: game.eventId,
         type: "fruitGranted",
-        playerId: player.playerId,
+        playerId: player.id,
         fruit,
         quantity: 10,
         time: Rune.gameTime(),

@@ -9,7 +9,7 @@ import { LocationMarker } from "./LocationMarker"
 
 export function ScrollingBackground() {
   const game = useStore((state) => state.game)
-  const players = useStore((state) => state.players)
+  const playerDetails = useStore((state) => state.playerDetails)
   const yourPlayerId = useStore((state) => state.yourPlayerId)
 
   const app = useApp()
@@ -23,7 +23,7 @@ export function ScrollingBackground() {
   const x = player ? -player.location.x * 32 + width / 2 - HALF_TILE : 0
   const y = player ? -player.location.y * 32 + height / 2 : 0
 
-  const otherPlayers = Object.values(game.players).filter((player) => player.playerId !== yourPlayerId)
+  const otherPlayers = Object.values(game.players).filter((player) => player.id !== yourPlayerId)
 
   return (
     <>
@@ -31,13 +31,13 @@ export function ScrollingBackground() {
         <Background />
         {otherPlayers.map((player) => (
           <Character
-            key={player.playerId}
+            key={player.id}
             character={player.character}
             location={player.location}
-            name={players[player.playerId].displayName}
+            name={playerDetails[player.id].displayName}
           />
         ))}
-        <LocationMarker location={player?.location} />
+        <LocationMarker />
       </Container>
       <Sprite
         texture={Texture.EMPTY}

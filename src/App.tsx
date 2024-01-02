@@ -13,7 +13,7 @@ import { EventLog } from "./components/EventLog.tsx"
 function App() {
   const playerId = useStore((state) => state.yourPlayerId)
   const setGame = useStore((state) => state.setGame)
-  const setPlayers = useStore((state) => state.setPlayers)
+  const setPlayerDetails = useStore((state) => state.setPlayerDetails)
   const setYourPlayerId = useStore((state) => state.setYourPlayerId)
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function App() {
     Rune.initClient({
       onChange: ({ game, yourPlayerId, players }) => {
         setGame(game)
-        setPlayers(players)
+        setPlayerDetails(players)
         setYourPlayerId(yourPlayerId ?? "")
       },
     })
