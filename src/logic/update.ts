@@ -1,3 +1,4 @@
+import { useStore } from "../store"
 import { GameState } from "./types"
 
 export function update({ game }: { game: GameState }) {
@@ -11,17 +12,14 @@ export function update({ game }: { game: GameState }) {
       continue
     }
 
-    if (player.location.x < player.destination.x) {
-      player.location.x += 1
+    const result = useStore.getState().aStarFinder.findPath(player.location, player.destination)
+    if (result.length < 2) {
+      player.destination = player.location
+      continue
     }
-    if (player.location.x > player.destination.x) {
-      player.location.x -= 1
-    }
-    if (player.location.y < player.destination.y) {
-      player.location.y += 1
-    }
-    if (player.location.y > player.destination.y) {
-      player.location.y -= 1
-    }
+
+    const [x, y] = result[1]
+    player.location.x = x
+    player.location.y = y
   }
 }

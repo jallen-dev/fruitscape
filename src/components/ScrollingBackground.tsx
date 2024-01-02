@@ -6,11 +6,13 @@ import { Background } from "./Background"
 import { useStore } from "../store"
 import { Character } from "./Character"
 import { LocationMarker } from "./LocationMarker"
+import { MAP_HEIGHT, MAP_WIDTH } from "../constants"
 
 export function ScrollingBackground() {
   const game = useStore((state) => state.game)
   const playerDetails = useStore((state) => state.playerDetails)
   const yourPlayerId = useStore((state) => state.yourPlayerId)
+  const obstacleMap = useStore((state) => state.obstacleMap)
 
   const app = useApp()
   app.resizeTo = window
@@ -51,7 +53,41 @@ export function ScrollingBackground() {
 
           const xTiles = Math.floor((event.screen.x - width / 2 + HALF_TILE) / 32)
           const yTiles = Math.floor((event.screen.y - height / 2) / 32)
-          const nextCoords = [player.location.x + xTiles, player.location.y + yTiles]
+          const nextCoords = [
+            Math.min(MAP_WIDTH - 1, Math.max(0, player.location.x + xTiles)),
+            Math.min(MAP_HEIGHT - 1, Math.max(0, player.location.y + yTiles)),
+          ]
+          if (obstacleMap[nextCoords[1]][nextCoords[0]]) {
+            // tile is an obstacle. Perform a BFS to find the nearest non-obstacle tile
+            const queue = [nextCoords]
+            const visited = new Set<string>()
+            while (queue.length > 0) {
+              const [x, y] = queue.shift()!
+              if (visited.has(`${x},${y}`)) {
+                continue
+              }
+              if (obstacleMap[y][x]) {
+                visited.add(`${x},${y}`)
+
+                if (x + 1 < MAP_WIDTH) {
+                  queue.push([x + 1, y])
+                }
+                if (x - 1 >= 0) {
+                  queue.push([x - 1, y])
+                }
+                if (y + 1 < MAP_HEIGHT) {
+                  queue.push([x, y + 1])
+                }
+                if (y - 1 >= 0) {
+                  queue.push([x, y - 1])
+                }
+              } else {
+                nextCoords[0] = x
+                nextCoords[1] = y
+                break
+              }
+            }
+          }
           Rune.actions.setDestination({ playerId: yourPlayerId, destination: { x: nextCoords[0], y: nextCoords[1] } })
         }}
       />

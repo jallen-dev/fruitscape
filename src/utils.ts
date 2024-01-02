@@ -1,8 +1,9 @@
-import { MAP_WIDTH } from "./constants"
+import { MAP_HEIGHT, MAP_WIDTH } from "./constants"
 import { ALL_CHARACTER_TYPES } from "./models/Character"
 import { ALL_FRUIT_TYPES, FruitType } from "./models/Fruit"
 import { Npc } from "./models/Npc"
 import { npcs as npcsMap } from "./assets/maps"
+import { objects } from "./assets/maps"
 
 export function generateFruit(numFruit = 10) {
   // shuffle all fruits
@@ -63,4 +64,18 @@ function shuffle<T>(array: T[]) {
   }
 
   return array
+}
+
+export function generateObstacleMap() {
+  const map = []
+  for (let y = 0; y < MAP_HEIGHT; y++) {
+    const row = []
+    for (let x = 0; x < MAP_WIDTH; x++) {
+      const tile = objects[y * MAP_WIDTH + x]
+      row.push(tile === 0 ? 0 : 1)
+    }
+    map.push(row)
+  }
+
+  return map
 }

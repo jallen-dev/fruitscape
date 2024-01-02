@@ -9,10 +9,14 @@ import { Trade } from "./components/Trade.tsx"
 import { MAP_HEIGHT, MAP_WIDTH } from "./constants.ts"
 import { Recipe } from "./components/Recipe.tsx"
 import { EventLog } from "./components/EventLog.tsx"
+import { generateObstacleMap } from "./utils.ts"
+import { AStarFinder } from "astar-typescript"
 
 function App() {
   const playerId = useStore((state) => state.yourPlayerId)
   const setGame = useStore((state) => state.setGame)
+  const setObstacleMap = useStore((state) => state.setObstacleMap)
+  const setAStarFinder = useStore((state) => state.setAStarFinder)
   const setPlayerDetails = useStore((state) => state.setPlayerDetails)
   const setYourPlayerId = useStore((state) => state.setYourPlayerId)
 
@@ -27,6 +31,10 @@ function App() {
         setYourPlayerId(yourPlayerId ?? "")
       },
     })
+
+    const obstacleMap = generateObstacleMap()
+    setObstacleMap(obstacleMap)
+    setAStarFinder(new AStarFinder({ grid: { matrix: obstacleMap } }))
 
     load().then((sheet) => {
       // 0 represents an empty tile so put "null" at the beginning of the list
