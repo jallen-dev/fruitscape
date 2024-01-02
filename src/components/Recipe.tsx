@@ -31,20 +31,10 @@ export function Recipe() {
         {unSatisfiedIngredients.map(([fruitType, quantity]) => (
           <UnSatisfiedIngredient fruit={fruitType as FruitType} quantity={quantity} key={fruitType} />
         ))}
-        {satisfiedIngredients.map(([fruitType, quantity]) => (
+        {satisfiedIngredients.map(([fruitType]) => (
           <SatisfiedIngredient fruit={fruitType as FruitType} key={fruitType} />
         ))}
       </div>
-      {unSatisfiedIngredients.length === 0 && (
-        <button
-          className="bg-blue-600 text-white rounded-md px-4 py-2"
-          onClick={() => {
-            Rune.actions.completeRecipe({ playerId: useStore.getState().yourPlayerId })
-          }}
-        >
-          Complete
-        </button>
-      )}
       <Inventory />
     </Dialog>
   )

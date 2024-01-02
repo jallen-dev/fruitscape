@@ -2,7 +2,6 @@ import { Event } from "../models/Event"
 import { useStore } from "../store"
 
 export function EventLog() {
-  console.log("rendering EventLog")
   const events = useStore((state) => state.game.events)
 
   return (
@@ -23,6 +22,9 @@ function EventLogItem({ event }: { event: Event }) {
           {players[event.playerId].displayName} added {event.quantity} {event.fruit}!
         </div>
       )
+    }
+    case "recipeCompleted": {
+      return <div>Recipe complete!</div>
     }
   }
 }
