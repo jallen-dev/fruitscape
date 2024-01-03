@@ -5,6 +5,7 @@ import { addFruit } from "./addFruit"
 import { tradeFruit } from "./tradeFruit"
 import { setup } from "./setup"
 import { update } from "./update"
+import { createPlayer } from "./createPlayer"
 
 declare global {
   const Rune: RuneClient<GameState, GameActions>
@@ -22,6 +23,14 @@ Rune.initLogic({
     },
     addFruit: addFruit,
     tradeFruit: tradeFruit,
+  },
+  events: {
+    playerJoined(playerId, { game }) {
+      game.players[playerId] = createPlayer(playerId, game)
+    },
+    playerLeft(playerId, { game }) {
+      delete game.players[playerId]
+    },
   },
   updatesPerSecond: 8,
 })

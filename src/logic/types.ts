@@ -11,6 +11,7 @@ export interface GameState {
   contributedIngredients: Partial<Record<FruitType, number>>
   events: Event[]
   eventId: number
+  fruits: FruitType[]
 }
 
 export type GameActions = {
