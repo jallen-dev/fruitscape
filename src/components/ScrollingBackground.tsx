@@ -53,6 +53,8 @@ export function ScrollingBackground() {
 
           const xTiles = Math.floor((event.screen.x - width / 2 + HALF_TILE) / 32)
           const yTiles = Math.floor((event.screen.y - height / 2) / 32)
+          // TODO: the logic would be as simple as this with a better astar implementation
+          // const nextCoords = [player.location.x + xTiles, player.location.y + yTiles]
           const nextCoords = [
             Math.min(RIGHT_BOUNDS, Math.max(LEFT_BOUNDS, player.location.x + xTiles)),
             Math.min(BOTTOM_BOUNDS, Math.max(TOP_BOUNDS, player.location.y + yTiles)),

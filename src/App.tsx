@@ -34,7 +34,16 @@ function App() {
 
     const obstacleMap = generateObstacleMap()
     setObstacleMap(obstacleMap)
-    setAStarFinder(new AStarFinder({ grid: { matrix: obstacleMap } }))
+    setAStarFinder(
+      // TODO: find a better astar implementation
+      new AStarFinder({
+        grid: { matrix: obstacleMap },
+        // "allowPathAsCloseAsPossible" only works if the tile you click on is walkable. it doesn't work at all if you click on an obstacle.
+        // worse, it's buggy in combination with the custom logic that finds nearest walkable tile.
+        // allowPathAsCloseAsPossible: true,
+        includeStartNode: false,
+      })
+    )
 
     load().then((sheet) => {
       // 0 represents an empty tile so put "null" at the beginning of the list

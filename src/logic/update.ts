@@ -13,12 +13,12 @@ export function update({ game }: { game: GameState }) {
     }
 
     const result = useStore.getState().aStarFinder.findPath(player.location, player.destination)
-    if (result.length < 2) {
+    if (result.length < 1) {
       player.destination = player.location
       continue
     }
 
-    const [x, y] = result[1]
+    const [x, y] = result[0]
     player.location.x = x
     player.location.y = y
   }
