@@ -11,7 +11,7 @@ import { Recipe } from "./components/Recipe.tsx"
 import { EventLog } from "./components/EventLog.tsx"
 import { generateObstacleMap } from "./utils.ts"
 import { AStarFinder } from "astar-typescript"
-import { HowToPlay } from "./components/HowToPlay.tsx"
+import { HowToPlay } from "./components/HowToPlay/HowToPlay.tsx"
 
 function App() {
   const playerId = useStore((state) => state.yourPlayerId)
