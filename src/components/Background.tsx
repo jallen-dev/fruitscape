@@ -2,7 +2,7 @@ import { Container } from "@pixi/react"
 
 import { TileMap } from "./TileMap"
 import { useStore } from "../store"
-import { background, objects, npcs } from "../assets/maps"
+import { background, objects, npcs, walkableObjects } from "../assets/maps"
 
 export function Background() {
   const tileNames = useStore((state) => state.tileNames)
@@ -13,7 +13,7 @@ export function Background() {
 
   return (
     <Container scale={2}>
-      <TileMap layers={[background, objects, npcs]} tileNames={tileNames} />
+      <TileMap layers={[background, walkableObjects, objects, npcs]} tileNames={tileNames} />
     </Container>
   )
 }
