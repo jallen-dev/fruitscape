@@ -11,7 +11,7 @@ export function Inventory() {
 
   return (
     <div className="w-full">
-      <div className="text-xl mb-1">Inventory</div>
+      <div className="text-xl mb-1 text-center">Inventory</div>
       <div className="grid grid-cols-4 gap-2 w-full">
         {Object.entries(inventory).map(([fruitType, quantity]) => (
           <FruitQuantity fruitType={fruitType as FruitType} quantity={quantity} key={fruitType} />
