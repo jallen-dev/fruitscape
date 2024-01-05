@@ -2,17 +2,13 @@ import { useStore } from "../store"
 import { Character } from "./Character"
 
 export function Player() {
-  const game = useStore((state) => state.game)
-  const playerDetails = useStore((state) => state.playerDetails)
   const playerId = useStore((state) => state.yourPlayerId)
+  const displayName = useStore((state) => state.playerDetails[playerId]?.displayName)
+  const character = useStore((state) => state.game.players[playerId]?.character)
 
-  const player = game.players[playerId]
-
-  if (!player) {
+  if (!character) {
     return null
   }
 
-  const playerInfo = playerDetails[playerId]
-
-  return <Character character={player.character} name={playerInfo.displayName} />
+  return <Character character={character} name={displayName} />
 }
