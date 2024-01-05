@@ -1,5 +1,3 @@
-import { useState } from "react"
-import { Dialog } from "../../components/Dialog"
 import { FruitType } from "../../models/Fruit"
 import { SwapFruit } from "../../components/SwapFruit"
 import { ContributeFruit } from "./ContributeFruit"
