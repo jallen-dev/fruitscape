@@ -12,6 +12,7 @@ import { EventLog } from "./components/EventLog.tsx"
 import { generateObstacleMap } from "./utils.ts"
 import { AStarFinder } from "astar-typescript"
 import { HowToPlay } from "./components/HowToPlay/HowToPlay.tsx"
+import { Music } from "./components/Music.tsx"
 
 function App() {
   const playerId = useStore((state) => state.yourPlayerId)
@@ -91,6 +92,7 @@ function App() {
       <Recipe />
       <EventLog />
       <HowToPlay />
+      <Music />
     </div>
   )
 }
