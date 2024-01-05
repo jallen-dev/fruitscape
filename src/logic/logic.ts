@@ -23,6 +23,9 @@ Rune.initLogic({
     },
     addFruit: addFruit,
     tradeFruit: tradeFruit,
+    setCharacter: ({ playerId, character }, { game }) => {
+      game.players[playerId].character = character
+    },
   },
   events: {
     playerJoined(playerId, { game }) {

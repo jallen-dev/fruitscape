@@ -1,34 +1,38 @@
 import "./App.css"
-import { Stage } from "@pixi/react"
-import { ScrollingBackground } from "./components/ScrollingBackground.tsx"
 import { useStore } from "./store.ts"
-import { Player } from "./components/Player.tsx"
-import { Trade } from "./components/Trade.tsx"
-import { Recipe } from "./components/Recipe.tsx"
-import { EventLog } from "./components/EventLog.tsx"
-import { HowToPlay } from "./components/HowToPlay/HowToPlay.tsx"
+import { HowToPlay } from "./screens/HowToPlay/HowToPlay.tsx"
 import { usePlayerMovement } from "./hooks/usePlayerMovement.ts"
 import { useInitClient } from "./hooks/useInitClient.ts"
 import { Music } from "./components/Music.tsx"
+import { CharacterSelect } from "./screens/CharacterSelect/CharacterSelect.tsx"
+import { Game } from "./screens/Game/Game.tsx"
+import { Screen } from "./types.ts"
 
 function App() {
   const playerId = useStore((state) => state.yourPlayerId)
+  const assetsLoaded = useStore((state) => state.assetsLoaded)
+  const screen = useStore((state) => state.screen)
   useInitClient()
   usePlayerMovement(playerId)
 
+  if (!assetsLoaded) {
+    return null
+  }
+
+  const GameScreen = SCREENS[screen]
+
   return (
     <div>
-      <Stage>
-        <ScrollingBackground />
-        <Player />
-      </Stage>
-      <Trade />
-      <Recipe />
-      <EventLog />
-      <HowToPlay />
+      <GameScreen />
       <Music />
     </div>
   )
 }
 
 export default App
+
+const SCREENS: { [S in Screen]: () => React.JSX.Element | null } = {
+  characterSelect: CharacterSelect,
+  game: Game,
+  howToPlay: HowToPlay,
+} as const

@@ -3,6 +3,7 @@ import { GameState } from "./logic/types"
 import { Player, PlayerId } from "rune-games-sdk"
 import { subscribeWithSelector } from "zustand/middleware"
 import { AStarFinder } from "astar-typescript"
+import { Screen } from "./types"
 
 interface State {
   tileNames?: string[]
@@ -17,6 +18,7 @@ interface State {
   tradePartner?: string
   obstacleMap: number[][]
   aStarFinder: AStarFinder
+  screen: Screen
 }
 
 interface Actions {
@@ -32,6 +34,7 @@ interface Actions {
   setTradePartner: (tradePartner: string) => void
   setObstacleMap: (obstacleMap: number[][]) => void
   setAStarFinder: (aStarFinder: AStarFinder) => void
+  setScreen: (screen: Screen) => void
 }
 
 export const useStore = create<State & Actions>()(
@@ -45,6 +48,7 @@ export const useStore = create<State & Actions>()(
     game: {
       players: {},
       npcs: {},
+      fruits: [],
       currentRecipe: {},
       contributedIngredients: {},
       events: [],
@@ -52,6 +56,7 @@ export const useStore = create<State & Actions>()(
     },
     obstacleMap: [],
     aStarFinder: new AStarFinder({ grid: { matrix: [[]] } }),
+    screen: "characterSelect",
     setTileNames: (tileNames) => set({ tileNames }),
     setGame: (game) => set({ game }),
     setPlayerDetails: (playerDetails) => set({ playerDetails }),
@@ -64,5 +69,6 @@ export const useStore = create<State & Actions>()(
     setTradePartner: (tradePartner) => set({ tradePartner }),
     setObstacleMap: (obstacleMap) => set({ obstacleMap }),
     setAStarFinder: (aStarFinder) => set({ aStarFinder }),
+    setScreen: (screen) => set({ screen }),
   }))
 )
