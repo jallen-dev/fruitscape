@@ -22,10 +22,10 @@ function App() {
   const GameScreen = SCREENS[screen]
 
   return (
-    <div>
+    <>
       <GameScreen />
       <Music />
-    </div>
+    </>
   )
 }
 

@@ -6,20 +6,18 @@ export function Dialog({
   children,
   onCloseDialog,
   open = true,
-  color = "bg-amber-200",
 }: {
   title: string
   children: React.ReactNode
   onCloseDialog: () => void
   open?: boolean
-  color?: string
 }) {
   return (
     <RadixDialog.Root open={open}>
       <RadixDialog.Portal>
         <RadixDialog.Overlay className="bg-black w-full h-full absolute opacity-50" onClick={onCloseDialog} />
         <RadixDialog.Content
-          className={`absolute top-1/2 left-1/2 w-5/6 h-5/6 ${color} -translate-x-1/2 -translate-y-1/2 rounded-md p-2 overflow-hidden flex flex-col`}
+          className={`absolute top-1/2 left-1/2 w-5/6 h-5/6 bg-amber-200 -translate-x-1/2 -translate-y-1/2 rounded-md p-2 overflow-hidden flex flex-col text-gray-800`}
         >
           <RadixDialog.Title className="text-xl text-center">{title}</RadixDialog.Title>
           <div className="flex flex-col items-center place-content-between h-full pt-2">{children}</div>

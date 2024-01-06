@@ -12,8 +12,8 @@ export function CharacterSelect() {
   }
 
   return (
-    <div className="flex flex-col justify-around w-screen overflow-hidden h-screen bg-[#84c669] text-black">
-      <div className="flex justify-around">
+    <div className="flex flex-col justify-around overflow-hidden h-full items-center">
+      <div className="flex justify-around w-full">
         {Object.values(playerDetails).map((playerDetail) => (
           <div className="grow basis-0 flex flex-col items-center overflow-hidden" key={playerDetail.playerId}>
             <Character character={players[playerDetail.playerId].character} />
@@ -23,21 +23,27 @@ export function CharacterSelect() {
           </div>
         ))}
       </div>
-      <div className="flex flex-wrap justify-between gap-2">
-        {ALL_CHARACTER_TYPES.map((character) => (
-          <div
-            className={character === players[yourPlayerId].character ? "border" : ""}
-            key={character}
-            onClick={() => Rune.actions.setCharacter({ playerId: yourPlayerId, character })}
-          >
-            <Character character={character} />
-          </div>
-        ))}
+      <div>
+        <div className="text-xl mb-2">Choose your character</div>
+        <div className="flex flex-wrap justify-between gap-2">
+          {ALL_CHARACTER_TYPES.map((character) => {
+            const border = character === players[yourPlayerId].character ? "border-4 box-border" : "p-1"
+            return (
+              <div
+                className={`h-[72px] w-[72px] ${border}`}
+                key={character}
+                onClick={() => Rune.actions.setCharacter({ playerId: yourPlayerId, character })}
+              >
+                <Character character={character} />
+              </div>
+            )
+          })}
+        </div>
       </div>
       <button className="text-2xl" onClick={() => setScreen("howToPlay")}>
         How to Play?
       </button>
-      <button className="text-2xl" onClick={() => setScreen("game")}>
+      <button className="text-xl bg-blue-600 rounded-md p-2 px-8" onClick={() => setScreen("game")}>
         Start
       </button>
     </div>
