@@ -39,6 +39,8 @@ export const useStore = create<State & Actions>()(
       players: {},
       npcs: {},
       fruits: [],
+      uniqueFruits: 0,
+      recipesCompleted: 0,
       currentRecipe: {},
       contributedIngredients: {},
       events: [],

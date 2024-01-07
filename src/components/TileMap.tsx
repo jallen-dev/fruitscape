@@ -1,4 +1,5 @@
 import { PixiComponent } from "@pixi/react"
+// @ts-expect-error something about types idk
 import { CompositeTilemap } from "@pixi/tilemap"
 import { DisplayObject } from "pixi.js"
 import { MAP_WIDTH } from "../constants"
@@ -16,9 +17,8 @@ export const TileMap = PixiComponent<TileMapProps, DisplayObject>("TileMap", {
     const tilemap = new CompositeTilemap()
     drawLayers(tilemap, layers, tileNames, tileWidth)
 
-    return tilemap as any
+    return tilemap
   },
-  // @ts-ignore DisplayObject not assignable to CompositeTilemap
   applyProps(instance: CompositeTilemap, oldProps, newProps) {
     const { layers, tileNames, tileWidth = 16 } = newProps
     drawLayers(instance, layers, tileNames, tileWidth)
