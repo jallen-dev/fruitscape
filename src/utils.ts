@@ -1,17 +1,12 @@
 import { MAP_HEIGHT, MAP_WIDTH } from "./constants"
 import { ALL_CHARACTER_TYPES } from "./models/Character"
-import { ALL_FRUIT_TYPES, FruitType } from "./models/Fruit"
+import { FruitType } from "./models/Fruit"
 import { Npc } from "./models/Npc"
 import { npcs as npcsMap } from "./assets/maps"
 import { objects } from "./assets/maps"
+import { GameState } from "./logic/types"
 
-export function generateFruit(numFruit = 10) {
-  // shuffle all fruits
-  const shuffledFruits = shuffle([...ALL_FRUIT_TYPES])
-  return shuffledFruits.slice(0, numFruit)
-}
-
-export function generateNPCs(fruits: FruitType[]) {
+export function generateNPCs() {
   const npcs: Record<string, Npc> = {}
 
   for (let i = 0; i < npcsMap.length; i++) {
@@ -22,11 +17,6 @@ export function generateNPCs(fruits: FruitType[]) {
     const y = Math.floor(i / MAP_WIDTH)
     const x = i % MAP_WIDTH
 
-    const offeredFruit = fruits[Math.floor(Math.random() * fruits.length)]
-    const desiredFruit = fruits.filter((fruit) => fruit !== offeredFruit)[
-      Math.floor(Math.random() * (fruits.length - 1))
-    ]
-
     npcs[i.toString()] = {
       id: i.toString(),
       character: ALL_CHARACTER_TYPES[Math.floor(Math.random() * ALL_CHARACTER_TYPES.length)],
@@ -34,22 +24,44 @@ export function generateNPCs(fruits: FruitType[]) {
         x,
         y,
       },
-      offeredFruit,
-      desiredFruit,
+      // placeholders
+      offeredFruit: FruitType.Apple,
+      desiredFruit: FruitType.Apricot,
     }
   }
 
   return npcs
 }
 
-export function generateRecipe(fruits: FruitType[]) {
-  return fruits.reduce((acc, fruit) => {
+export function setNpcsFruits(game: GameState) {
+  const fruitsInPlay = game.fruits.slice(0, game.uniqueFruits)
+  let i = 0
+  for (const npc of Object.values(game.npcs)) {
+    const offeredFruit = fruitsInPlay[i++ % fruitsInPlay.length]
+    const desiredFruit = fruitsInPlay.filter((fruit) => fruit !== offeredFruit)[
+      Math.floor(Math.random() * (fruitsInPlay.length - 1))
+    ]
+
+    npc.offeredFruit = offeredFruit
+    npc.desiredFruit = desiredFruit
+  }
+}
+
+export function generateRecipe(fruits: FruitType[], totalFruits: number) {
+  const recipe = fruits.reduce((acc, fruit) => {
     acc[fruit] = (acc[fruit] || 0) + 1
     return acc
   }, {} as Partial<Record<FruitType, number>>)
+  const remainingFruits = totalFruits - fruits.length
+  for (let i = 0; i < remainingFruits; i++) {
+    const fruit = fruits[Math.floor(Math.random() * fruits.length)]
+    recipe[fruit]! += 1
+  }
+
+  return recipe
 }
 
-function shuffle<T>(array: T[]) {
+export function shuffle<T>(array: T[]) {
   let currentIndex = array.length,
     randomIndex
 

@@ -5,7 +5,8 @@ import { GameState } from "./types"
 
 export function createPlayer(id: PlayerId, game: GameState) {
   const startingLocation = getEmptyStartingLocation(game)
-  const randomFruit = game.fruits[Math.floor(Math.random() * game.fruits.length)]
+  const fruitsInPlay = game.fruits.slice(0, game.uniqueFruits)
+  const randomFruit = fruitsInPlay[Math.floor(Math.random() * fruitsInPlay.length)]
 
   return {
     id,

@@ -29,7 +29,11 @@ export function Recipe() {
     <Dialog title="Contribute Fruit" onCloseDialog={() => setRecipeOpen(false)}>
       <div className={`grid ${gridCols} gap-2 w-full`}>
         {unSatisfiedIngredients.map(([fruitType, quantity]) => (
-          <UnSatisfiedIngredient fruit={fruitType as FruitType} quantity={quantity} key={fruitType} />
+          <UnSatisfiedIngredient
+            fruit={fruitType as FruitType}
+            quantity={quantity - (contributedIngredients[fruitType as FruitType] ?? 0)}
+            key={fruitType}
+          />
         ))}
         {satisfiedIngredients.map(([fruitType]) => (
           <SatisfiedIngredient fruit={fruitType as FruitType} key={fruitType} />

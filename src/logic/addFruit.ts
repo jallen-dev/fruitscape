@@ -1,7 +1,7 @@
 import { FruitType } from "../models/Fruit"
 import { ContextWithGameState, ActionContext } from "rune-games-sdk"
 import { GameState } from "./types"
-import { generateFruit, generateRecipe } from "../utils"
+import { generateRecipe, setNpcsFruits } from "../utils"
 
 type Params = {
   fruit: FruitType
@@ -50,11 +50,14 @@ function isAllIngredientsAdded(game: GameState) {
 }
 
 function generateNewRecipe(game: GameState) {
-  const numIngredients = Object.keys(game.currentRecipe).length + 1
-  const newFruits = generateFruit(numIngredients)
-  const newRecipe = generateRecipe(newFruits)
-  game.currentRecipe = newRecipe
+  game.recipesCompleted += 1
   game.contributedIngredients = {}
+  game.uniqueFruits = Math.min(Object.keys(game.npcs).length, game.uniqueFruits + 1)
+
+  const totalIngredients = 4 * (game.recipesCompleted + 1)
+
+  const newRecipe = generateRecipe(game.fruits.slice(0, game.uniqueFruits), totalIngredients)
+  game.currentRecipe = newRecipe
 
   game.events.push({
     id: game.eventId,
@@ -63,24 +66,25 @@ function generateNewRecipe(game: GameState) {
   })
   game.eventId += 1
 
-  givePlayersMoreFruit(game)
+  setNpcsFruits(game)
+  givePlayersMoreFruit(totalIngredients, game)
 }
 
-function givePlayersMoreFruit(game: GameState) {
+function givePlayersMoreFruit(totalIngredients: number, game: GameState) {
   for (const player of Object.values(game.players)) {
-    const newFruits = generateFruit(1)
-    for (const fruit of newFruits) {
-      player.inventory[fruit] = (player.inventory[fruit] ?? 0) + 10
-      // TODO: maybe extract event generation to a function
-      game.events.push({
-        id: game.eventId,
-        type: "fruitGranted",
-        playerId: player.id,
-        fruit,
-        quantity: 10,
-        time: Rune.gameTime(),
-      })
-      game.eventId += 1
-    }
+    const fruitsInPlay = game.fruits.slice(0, game.uniqueFruits)
+    const randomFruit = fruitsInPlay[Math.floor(Math.random() * fruitsInPlay.length)]
+
+    player.inventory[randomFruit] = (player.inventory[randomFruit] ?? 0) + totalIngredients
+    // TODO: maybe extract event generation to a function
+    game.events.push({
+      id: game.eventId,
+      type: "fruitGranted",
+      playerId: player.id,
+      fruit: randomFruit,
+      quantity: totalIngredients,
+      time: Rune.gameTime(),
+    })
+    game.eventId += 1
   }
 }
