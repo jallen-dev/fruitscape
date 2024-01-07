@@ -12,6 +12,7 @@ export function createPlayer(id: PlayerId, game: GameState) {
     id,
     location: startingLocation,
     destination: startingLocation,
+    path: [],
     character: ALL_CHARACTER_TYPES[Math.floor(Math.random() * ALL_CHARACTER_TYPES.length)],
     score: 0,
     inventory: { [randomFruit]: 10 },

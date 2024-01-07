@@ -7,7 +7,7 @@ export function usePlayerMovement(playerId: string) {
     const unsubscribe = useStore.subscribe(
       (state) => state.game.players[playerId],
       (player) => {
-        if (player && player.location.x === player.destination.x && player.location.y === player.destination.y) {
+        if (player && player.path.length === 0) {
           // player has reached their destination.
 
           // check if they are standing on the chest

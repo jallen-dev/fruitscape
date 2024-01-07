@@ -18,7 +18,7 @@ export interface GameState {
 }
 
 export type GameActions = {
-  setDestination: (params: { playerId: string; destination: { x: number; y: number } }) => void
+  setDestination: (params: { playerId: string; path: Array<[number, number]> }) => void
   addFruit: (params: { fruit: FruitType }) => void
   tradeFruit: (params: { exchangedFruit: FruitType; forFruit: FruitType }) => void
   setCharacter: (params: { playerId: string; character: CharacterType }) => void

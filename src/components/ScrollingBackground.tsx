@@ -90,7 +90,11 @@ export function ScrollingBackground() {
               }
             }
           }
-          Rune.actions.setDestination({ playerId: yourPlayerId, destination: { x: nextCoords[0], y: nextCoords[1] } })
+
+          const [x, y] = nextCoords
+          const path = useStore.getState().aStarFinder.findPath(player.location, { x, y }) as Array<[number, number]>
+
+          Rune.actions.setDestination({ playerId: yourPlayerId, path })
         }}
       />
     </>
