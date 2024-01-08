@@ -11,6 +11,9 @@ export function useInitClient() {
     }
     Rune.initClient({
       onChange: ({ game, yourPlayerId, players }) => {
+        if (game.gameId !== useStore.getState().gameId) {
+          useStore.getState().reset(game.gameId)
+        }
         useStore.setState({ game, yourPlayerId, playerDetails: players })
       },
     })

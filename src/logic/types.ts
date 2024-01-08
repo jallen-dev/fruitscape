@@ -15,6 +15,7 @@ export interface GameState {
   fruits: FruitType[]
   uniqueFruits: number
   recipesCompleted: number
+  gameId: number
 }
 
 export type GameActions = {

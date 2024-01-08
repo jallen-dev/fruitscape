@@ -19,6 +19,7 @@ export function setup(allPlayerIds: PlayerId[]) {
     events: [],
     eventId: 0,
     players: {},
+    gameId: Math.random(),
   }
 
   setNpcsFruits(gameState)

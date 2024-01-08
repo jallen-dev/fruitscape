@@ -18,6 +18,7 @@ interface State {
   obstacleMap: number[][]
   aStarFinder: AStarFinder
   screen: Screen
+  gameId: number
 }
 
 interface Actions {
@@ -25,6 +26,7 @@ interface Actions {
   setRecipeOpen: (recipeOpen: boolean) => void
   setTradePartner: (tradePartner: string) => void
   setScreen: (screen: Screen) => void
+  reset: (gameId: number) => void
 }
 
 export const useStore = create<State & Actions>()(
@@ -45,7 +47,9 @@ export const useStore = create<State & Actions>()(
       contributedIngredients: {},
       events: [],
       eventId: 0,
+      gameId: 0,
     },
+    gameId: 0,
     obstacleMap: [],
     aStarFinder: new AStarFinder({ grid: { matrix: [[]] } }),
     screen: "characterSelect",
@@ -53,5 +57,7 @@ export const useStore = create<State & Actions>()(
     setRecipeOpen: (recipeOpen) => set({ recipeOpen }),
     setTradePartner: (tradePartner) => set({ tradePartner }),
     setScreen: (screen) => set({ screen }),
+    reset: (gameId) =>
+      set({ gameId, tradeOpen: false, recipeOpen: false, tradePartner: undefined, screen: "characterSelect" }),
   }))
 )
