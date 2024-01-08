@@ -10,7 +10,7 @@ export function HowToPlay() {
       <div>
         1. Tap on a character to trade
         <div className="relative">
-          <img src="howtoplay1.png" alt="how to play 1" className="w-96" />
+          <img src="images/howtoplay1.png" alt="how to play 1" className="w-96" />
           <div className="absolute top-1 right-1 bg-amber-200 p-1 rounded-lg h-1/2 w-1/2 overflow-hidden flex items-center text-black">
             <SwapFruit fromFruit={FruitType.GreenGrape} toFruit={FruitType.Grapefruit} />
           </div>
@@ -19,7 +19,7 @@ export function HowToPlay() {
       <div>
         2. Deliver fruit to the chest
         <div className="relative">
-          <img src="howtoplay2.png" alt="how to play 1" className="w-96" />
+          <img src="images/howtoplay2.png" alt="how to play 1" className="w-96" />
           <div className="absolute top-0 w-full h-1/2 p-1">
             <div className="bg-amber-200 p-2 rounded-lg">
               <ContributeFruit />
