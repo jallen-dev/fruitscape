@@ -1,5 +1,6 @@
 import { ArrowRightIcon } from "@radix-ui/react-icons"
-import { FruitType, FRUIT_IMAGES } from "../models/Fruit"
+
+import { FRUIT_IMAGES, FruitType } from "../models/Fruit"
 
 export function SwapFruit({ fromFruit, toFruit }: { fromFruit: FruitType; toFruit: FruitType }) {
   return (

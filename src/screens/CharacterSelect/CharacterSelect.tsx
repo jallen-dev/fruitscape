@@ -1,5 +1,5 @@
-import { useStore } from "../../store"
 import { ALL_CHARACTER_TYPES, CharacterType } from "../../models/Character"
+import { useStore } from "../../store"
 
 export function CharacterSelect() {
   const playerDetails = useStore((state) => state.playerDetails)

@@ -1,7 +1,7 @@
 import { Assets } from "@pixi/assets"
+import { SCALE_MODES } from "@pixi/constants"
 import { BaseTexture } from "@pixi/core"
 import { Spritesheet } from "@pixi/spritesheet"
-import { SCALE_MODES } from "@pixi/constants"
 
 import data from "./assets/atlas.json"
 

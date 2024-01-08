@@ -1,8 +1,9 @@
-import { create } from "zustand"
-import { GameState } from "./logic/types"
-import { Player, PlayerId } from "rune-games-sdk"
-import { subscribeWithSelector } from "zustand/middleware"
 import { AStarFinder } from "astar-typescript"
+import { Player, PlayerId } from "rune-games-sdk"
+import { create } from "zustand"
+import { subscribeWithSelector } from "zustand/middleware"
+
+import { GameState } from "./logic/types"
 import { Screen } from "./models/Screen"
 
 interface State {
@@ -59,5 +60,5 @@ export const useStore = create<State & Actions>()(
     setScreen: (screen) => set({ screen }),
     reset: (gameId) =>
       set({ gameId, tradeOpen: false, recipeOpen: false, tradePartner: undefined, screen: "characterSelect" }),
-  }))
+  })),
 )

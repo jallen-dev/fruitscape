@@ -2,6 +2,7 @@ import { PixiComponent } from "@pixi/react"
 // @ts-expect-error something about types idk
 import { CompositeTilemap } from "@pixi/tilemap"
 import { DisplayObject } from "pixi.js"
+
 import { MAP_WIDTH } from "../constants"
 
 type TileMapData = number[]
@@ -30,7 +31,7 @@ function drawLayers(
   layers: TileMapData[],
   tileNames: string[],
   tileWidth = 16,
-  mapWidth = MAP_WIDTH
+  mapWidth = MAP_WIDTH,
 ) {
   tileMap.clear()
   for (const layer of layers) {

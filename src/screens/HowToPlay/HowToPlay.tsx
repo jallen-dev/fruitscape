@@ -1,7 +1,7 @@
-import { FruitType } from "../../models/Fruit"
 import { SwapFruit } from "../../components/SwapFruit"
-import { ContributeFruit } from "./ContributeFruit"
+import { FruitType } from "../../models/Fruit"
 import { useStore } from "../../store"
+import { ContributeFruit } from "./ContributeFruit"
 
 export function HowToPlay() {
   const setScreen = useStore((state) => state.setScreen)

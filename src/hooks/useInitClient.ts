@@ -1,7 +1,8 @@
 import { AStarFinder } from "astar-typescript"
 import { useEffect } from "react"
-import { useStore } from "../store"
+
 import { load } from "../loadAssets"
+import { useStore } from "../store"
 import { generateObstacleMap } from "../utils"
 
 export function useInitClient() {

@@ -1,10 +1,10 @@
+import { npcs as npcsMap } from "./assets/maps"
+import { objects } from "./assets/maps"
 import { MAP_HEIGHT, MAP_WIDTH } from "./constants"
+import { GameState } from "./logic/types"
 import { ALL_CHARACTER_TYPES } from "./models/Character"
 import { FruitType } from "./models/Fruit"
 import { Npc } from "./models/Npc"
-import { npcs as npcsMap } from "./assets/maps"
-import { objects } from "./assets/maps"
-import { GameState } from "./logic/types"
 
 export function generateNPCs() {
   const npcs: Record<string, Npc> = {}
@@ -48,10 +48,13 @@ export function setNpcsFruits(game: GameState) {
 }
 
 export function generateRecipe(fruits: FruitType[], totalFruits: number) {
-  const recipe = fruits.reduce((acc, fruit) => {
-    acc[fruit] = (acc[fruit] || 0) + 1
-    return acc
-  }, {} as Partial<Record<FruitType, number>>)
+  const recipe = fruits.reduce(
+    (acc, fruit) => {
+      acc[fruit] = (acc[fruit] || 0) + 1
+      return acc
+    },
+    {} as Partial<Record<FruitType, number>>,
+  )
   const remainingFruits = totalFruits - fruits.length
   for (let i = 0; i < remainingFruits; i++) {
     const fruit = fruits[Math.floor(Math.random() * fruits.length)]

@@ -1,9 +1,9 @@
 import "./App.css"
-import { useStore } from "./store.ts"
-import { usePlayerMovement } from "./hooks/usePlayerMovement.ts"
-import { useInitClient } from "./hooks/useInitClient.ts"
 import { Music } from "./components/Music.tsx"
+import { useInitClient } from "./hooks/useInitClient.ts"
+import { usePlayerMovement } from "./hooks/usePlayerMovement.ts"
 import { SCREENS } from "./models/Screen.ts"
+import { useStore } from "./store.ts"
 
 function App() {
   const playerId = useStore((state) => state.yourPlayerId)

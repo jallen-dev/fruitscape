@@ -1,6 +1,7 @@
 import { Sprite, useApp } from "@pixi/react"
-import { useStore } from "../../store"
+
 import { CHARACTER_IMAGES } from "../../models/Character"
+import { useStore } from "../../store"
 
 export function PlayerCharactersDisplay({ containerRef }: { containerRef: React.RefObject<HTMLDivElement> }) {
   const players = useStore((state) => state.game.players)

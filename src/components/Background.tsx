@@ -1,8 +1,8 @@
 import { Container } from "@pixi/react"
 
-import { TileMap } from "./TileMap"
+import { background, npcs, objects, walkableObjects } from "../assets/maps"
 import { useStore } from "../store"
-import { background, objects, npcs, walkableObjects } from "../assets/maps"
+import { TileMap } from "./TileMap"
 
 export function Background() {
   const tileNames = useStore((state) => state.tileNames)

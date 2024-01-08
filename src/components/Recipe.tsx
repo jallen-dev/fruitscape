@@ -1,10 +1,11 @@
+import { CheckIcon } from "@radix-ui/react-icons"
+
 import { FRUIT_IMAGES, FruitType } from "../models/Fruit"
 import { playSound } from "../playSound"
 import { useStore } from "../store"
 import { Dialog } from "./Dialog"
 import { FruitQuantity } from "./FruitQuantity"
 import { Inventory } from "./Inventory"
-import { CheckIcon } from "@radix-ui/react-icons"
 
 export function Recipe() {
   const currentRecipe = useStore((state) => state.game.currentRecipe)
@@ -19,11 +20,11 @@ export function Recipe() {
   const gridCols = Object.keys(currentRecipe).length > 3 ? "grid-cols-4" : "grid-cols-3"
 
   const unSatisfiedIngredients = Object.entries(currentRecipe).filter(
-    ([fruitType, quantity]) => (contributedIngredients[fruitType as FruitType] ?? 0) < quantity
+    ([fruitType, quantity]) => (contributedIngredients[fruitType as FruitType] ?? 0) < quantity,
   )
 
   const satisfiedIngredients = Object.entries(currentRecipe).filter(
-    ([fruitType, quantity]) => (contributedIngredients[fruitType as FruitType] ?? 0) >= quantity
+    ([fruitType, quantity]) => (contributedIngredients[fruitType as FruitType] ?? 0) >= quantity,
   )
 
   function closeDialog() {

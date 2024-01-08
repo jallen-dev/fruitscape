@@ -1,8 +1,9 @@
 import { PlayerId } from "rune-games-sdk"
-import { generateNPCs, generateRecipe, setNpcsFruits, shuffle } from "../utils"
-import { GameState } from "./types"
-import { createPlayer } from "./createPlayer"
+
 import { ALL_FRUIT_TYPES } from "../models/Fruit"
+import { generateNPCs, generateRecipe, setNpcsFruits, shuffle } from "../utils"
+import { createPlayer } from "./createPlayer"
+import { GameState } from "./types"
 
 export function setup(allPlayerIds: PlayerId[]) {
   const fruits = shuffle([...ALL_FRUIT_TYPES])

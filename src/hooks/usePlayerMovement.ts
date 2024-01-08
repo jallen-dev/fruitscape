@@ -1,7 +1,8 @@
 import { useEffect } from "react"
-import { MAP_WIDTH, MAP_HEIGHT } from "../constants"
-import { useStore } from "../store"
+
+import { MAP_HEIGHT, MAP_WIDTH } from "../constants"
 import { playSound } from "../playSound"
+import { useStore } from "../store"
 
 export function usePlayerMovement(playerId: string) {
   useEffect(() => {
@@ -38,7 +39,7 @@ export function usePlayerMovement(playerId: string) {
             return
           }
         }
-      }
+      },
     )
 
     return unsubscribe

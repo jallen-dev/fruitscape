@@ -1,10 +1,11 @@
+import { ActionContext, ContextWithGameState } from "rune-games-sdk"
+
 import { FruitType } from "../models/Fruit"
-import { ContextWithGameState, ActionContext } from "rune-games-sdk"
 import { GameState } from "./types"
 
 export function tradeFruit(
   { exchangedFruit, forFruit }: { exchangedFruit: FruitType; forFruit: FruitType },
-  { game, playerId }: ContextWithGameState<ActionContext, GameState>
+  { game, playerId }: ContextWithGameState<ActionContext, GameState>,
 ) {
   const player = game.players[playerId]
   if (!player.inventory[exchangedFruit]) {

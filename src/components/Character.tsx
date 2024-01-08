@@ -1,5 +1,6 @@
 import { Container, Sprite, Text, useApp } from "@pixi/react"
 import { TextStyle } from "@pixi/text"
+
 import { CHARACTER_IMAGES, CharacterType } from "../models/Character"
 import { useStore } from "../store"
 

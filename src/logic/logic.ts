@@ -1,11 +1,11 @@
 import type { RuneClient } from "rune-games-sdk/multiplayer"
 
-import { GameActions, GameState } from "./types"
 import { addFruit } from "./addFruit"
-import { tradeFruit } from "./tradeFruit"
-import { setup } from "./setup"
-import { update } from "./update"
 import { createPlayer } from "./createPlayer"
+import { setup } from "./setup"
+import { tradeFruit } from "./tradeFruit"
+import { GameActions, GameState } from "./types"
+import { update } from "./update"
 
 declare global {
   const Rune: RuneClient<GameState, GameActions>
