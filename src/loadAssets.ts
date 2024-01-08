@@ -7,12 +7,12 @@ import data from "./assets/atlas.json"
 
 export async function load() {
   Assets.add({
-    alias: "atlas.png",
-    src: "atlas.png",
+    alias: "atlas",
+    src: "images/atlas.png",
     data: { scaleMode: SCALE_MODES.NEAREST },
   })
-  await Assets.load("atlas.png")
+  await Assets.load("atlas")
 
-  const sheet = new Spritesheet(BaseTexture.from("atlas.png"), data)
+  const sheet = new Spritesheet(BaseTexture.from("atlas"), data)
   return await sheet.parse()
 }

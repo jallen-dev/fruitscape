@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-const music = new Audio("music.mp3")
+const music = new Audio("audio/music.mp3")
 
 export function Music() {
   useEffect(() => {

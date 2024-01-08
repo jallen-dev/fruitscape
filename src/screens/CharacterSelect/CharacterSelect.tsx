@@ -57,7 +57,7 @@ function Character({ character }: { character: CharacterType }) {
       <div
         style={{
           backgroundPosition: `${characterIndex * -16}px 0px`,
-          backgroundImage: "url(characters.png)",
+          backgroundImage: "url(images/characters.png)",
           width: 16,
           height: 16,
           transform: "scale(4)",
