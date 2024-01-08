@@ -8,6 +8,10 @@ export function usePlayerMovement(playerId: string) {
     const unsubscribe = useStore.subscribe(
       (state) => state.game.players[playerId],
       (player, prevPlayer) => {
+        if (!player) {
+          return
+        }
+
         if (player.location.x === prevPlayer.location.x && player.location.y === prevPlayer.location.y) {
           // player has not moved
           return
