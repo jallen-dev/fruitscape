@@ -1,4 +1,5 @@
 import { FRUIT_IMAGES, FruitType } from "../models/Fruit"
+import { playSound } from "../playSound"
 import { useStore } from "../store"
 import { Dialog } from "./Dialog"
 import { FruitQuantity } from "./FruitQuantity"
@@ -25,8 +26,13 @@ export function Recipe() {
     ([fruitType, quantity]) => (contributedIngredients[fruitType as FruitType] ?? 0) >= quantity
   )
 
+  function closeDialog() {
+    setRecipeOpen(false)
+    playSound("closeChest")
+  }
+
   return (
-    <Dialog title="Contribute Fruit" onCloseDialog={() => setRecipeOpen(false)}>
+    <Dialog title="Contribute Fruit" onCloseDialog={closeDialog}>
       <div className={`grid ${gridCols} gap-2 w-full`}>
         {unSatisfiedIngredients.map(([fruitType, quantity]) => (
           <UnSatisfiedIngredient
@@ -54,7 +60,10 @@ function UnSatisfiedIngredient({ fruit, quantity }: { fruit: FruitType; quantity
       {Object.keys(inventory).includes(fruit) && (
         <button
           className="bg-blue-600 text-white rounded-md px-1 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          onClick={() => Rune.actions.addFruit({ fruit })}
+          onClick={() => {
+            Rune.actions.addFruit({ fruit })
+            playSound("addFruit")
+          }}
         >
           Add
         </button>
