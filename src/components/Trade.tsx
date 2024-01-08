@@ -17,20 +17,42 @@ export function Trade() {
   }
 
   const { offeredFruit, desiredFruit } = useStore.getState().game.npcs[tradePartner]
+  const hasDesiredFruit = Object.keys(inventory).includes(desiredFruit)
 
   return (
     <Dialog title="Trade" onCloseDialog={() => setTradeOpen(false)}>
       <SwapFruit fromFruit={desiredFruit} toFruit={offeredFruit} />
-      {Object.keys(inventory).includes(desiredFruit) && (
-        <button
-          className="bg-blue-600 text-white rounded-md px-4 py-2"
-          onClick={() => {
-            Rune.actions.tradeFruit({ exchangedFruit: desiredFruit, forFruit: offeredFruit })
-          }}
-        >
-          Trade 1
-        </button>
-      )}
+      <div className="flex flex-col items-center gap-2">
+        {hasDesiredFruit ? (
+          <>
+            <span className="text-center">
+              &ldquo;I&apos;ll trade you my {offeredFruit} for your {desiredFruit}.&rdquo;
+            </span>
+            <button
+              className="bg-blue-600 text-white rounded-md px-4 py-2"
+              onClick={() => {
+                Rune.actions.tradeFruit({ exchangedFruit: desiredFruit, forFruit: offeredFruit })
+              }}
+            >
+              Trade 1
+            </button>
+          </>
+        ) : (
+          <>
+            <span className="text-center">
+              &ldquo;You don&apos;t have any {desiredFruit}. Come back when you do.&rdquo;
+            </span>
+            <button
+              className="bg-blue-600 text-white rounded-md px-4 py-2"
+              onClick={() => {
+                setTradeOpen(false)
+              }}
+            >
+              I&apos;ll come back
+            </button>
+          </>
+        )}
+      </div>
 
       <Inventory />
     </Dialog>
