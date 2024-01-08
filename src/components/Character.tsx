@@ -3,15 +3,13 @@ import { TextStyle } from "@pixi/text"
 import { CHARACTER_IMAGES, CharacterType } from "../models/Character"
 import { useStore } from "../store"
 
-export function Character({
-  character,
-  location,
-  name,
-}: {
+type CharacterProps = {
   character: CharacterType
   location?: { x: number; y: number }
   name?: string
-}) {
+}
+
+export function Character({ character, location, name }: CharacterProps) {
   const app = useApp()
   const assetsLoaded = useStore((state) => state.assetsLoaded)
 

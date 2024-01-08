@@ -1,19 +1,15 @@
 import * as RadixDialog from "@radix-ui/react-dialog"
 import { Cross2Icon } from "@radix-ui/react-icons"
 
-export function Dialog({
-  title,
-  children,
-  onCloseDialog,
-  open = true,
-}: {
+type DialogProps = {
   title: string
   children: React.ReactNode
   onCloseDialog: () => void
-  open?: boolean
-}) {
+}
+
+export function Dialog({ title, children, onCloseDialog }: DialogProps) {
   return (
-    <RadixDialog.Root open={open}>
+    <RadixDialog.Root open={true}>
       <RadixDialog.Portal>
         <RadixDialog.Overlay className="bg-black w-full h-full absolute opacity-50" onClick={onCloseDialog} />
         <RadixDialog.Content

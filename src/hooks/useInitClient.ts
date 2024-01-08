@@ -6,9 +6,11 @@ import { generateObstacleMap } from "../utils"
 
 export function useInitClient() {
   useEffect(() => {
+    // This is mainly to prevent loading assets twice in strict mode which makes Pixi log lots of warnings.
     if (useStore.getState().initialized) {
       return
     }
+
     Rune.initClient({
       onChange: ({ game, yourPlayerId, players }) => {
         if (game.gameId !== useStore.getState().gameId) {

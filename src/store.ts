@@ -3,7 +3,7 @@ import { GameState } from "./logic/types"
 import { Player, PlayerId } from "rune-games-sdk"
 import { subscribeWithSelector } from "zustand/middleware"
 import { AStarFinder } from "astar-typescript"
-import { Screen } from "./types"
+import { Screen } from "./models/Screen"
 
 interface State {
   tileNames?: string[]
