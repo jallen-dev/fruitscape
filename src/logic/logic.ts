@@ -16,7 +16,6 @@ Rune.initLogic({
   maxPlayers: 4,
   setup: setup,
   update: update,
-  // TODO: "@rune-games-sdk:9 Game is in game over state, your game should prevent sending additional actions"
   actions: {
     setDestination: ({ playerId, path }, { game }) => {
       game.players[playerId].path = path
