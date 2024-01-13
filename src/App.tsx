@@ -1,27 +1,46 @@
+import { useEffect, useState } from "react"
+import reactLogo from "./assets/rune.svg"
+import viteLogo from "/vite.svg"
 import "./App.css"
-import { Music } from "./components/Music.tsx"
-import { useInitClient } from "./hooks/useInitClient.ts"
-import { usePlayerMovement } from "./hooks/usePlayerMovement.ts"
-import { SCREENS } from "./models/Screen.ts"
-import { useStore } from "./store.ts"
+import { GameState } from "./logic.ts"
 
 function App() {
-  const playerId = useStore((state) => state.yourPlayerId)
-  const assetsLoaded = useStore((state) => state.assetsLoaded)
-  const screen = useStore((state) => state.screen)
-  useInitClient()
-  usePlayerMovement(playerId)
+  const [game, setGame] = useState<GameState>()
+  useEffect(() => {
+    Rune.initClient({
+      onChange: ({ game }) => {
+        setGame(game)
+      },
+    })
+  }, [])
 
-  if (!assetsLoaded) {
-    return null
+  if (!game) {
+    return <div>Loading...</div>
   }
-
-  const GameScreen = SCREENS[screen]
 
   return (
     <>
-      <GameScreen />
-      <Music />
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://developers.rune.ai" target="_blank">
+          <img src={reactLogo} className="logo rune" alt="Rune logo" />
+        </a>
+      </div>
+      <h1>Vite + Rune</h1>
+      <div className="card">
+        <button onClick={() => Rune.actions.increment({ amount: 1 })}>
+          count is {game.count}
+        </button>
+        <p>
+          Edit <code>src/App.tsx</code> or <code>src/logic.ts</code> and save to
+          test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and Rune logos to learn more
+      </p>
     </>
   )
 }
