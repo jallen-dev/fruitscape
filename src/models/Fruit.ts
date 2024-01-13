@@ -47,5 +47,5 @@ export const FRUIT_IMAGES: Record<FruitType, string> = {
   [FruitType.Apricot]: "images/fruit/apricot.png",
   [FruitType.Strawberry]: "images/fruit/strawberry.png",
   [FruitType.Watermelon]: "images/fruit/watermelon.png",
-  [FruitType.Cantaloupe]: "images/fruit/.png",
+  [FruitType.Cantaloupe]: "images/fruit/cantaloupe.png",
 }
