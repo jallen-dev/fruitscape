@@ -1,14 +1,19 @@
+import { useStore } from "@/store"
 import { Sprite } from "@pixi/react"
 
-type LocationMarkerProps = {
-  location: { x: number; y: number }
-  destination: { x: number; y: number }
-}
+export function LocationMarker() {
+  const yourPlayerId = useStore((state) => state.yourPlayerId)
+  const players = useStore((state) => state.game.players)
 
-export function LocationMarker({ location, destination }: LocationMarkerProps) {
+  if (!yourPlayerId) {
+    return null
+  }
+
+  const { location, destination } = players[yourPlayerId]
+
   if (location.x === destination.x && location.y === destination.y) {
     return null
   }
 
-  return <Sprite image="1_60.png" x={destination.x * 32} y={destination.y * 32} anchor={{ x: 0, y: 0 }} scale={2} />
+  return <Sprite image="1_60.png" x={destination.x * 16} y={destination.y * 16} />
 }

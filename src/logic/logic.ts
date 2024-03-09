@@ -13,7 +13,7 @@ declare global {
 
 Rune.initLogic({
   minPlayers: 1,
-  maxPlayers: 6,
+  maxPlayers: 1,
   setup,
   update,
   actions: {

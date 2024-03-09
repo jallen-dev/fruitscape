@@ -43,7 +43,7 @@ export function CharacterSelect() {
       <button className="text-2xl" onClick={() => setScreen("howToPlay")}>
         How to Play?
       </button>
-      <button className="text-xl bg-blue-600 rounded-md p-2 px-8" onClick={() => setScreen("game")}>
+      <button className="text-xl bg-blue-600 rounded-md p-2 px-8" onClick={() => setScreen("play")}>
         Start
       </button>
     </div>
