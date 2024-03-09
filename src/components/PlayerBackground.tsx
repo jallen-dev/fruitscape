@@ -8,7 +8,7 @@ import { Background } from "./Background"
 import { Character } from "./Character"
 import { LocationMarker } from "./LocationMarker"
 
-export function ScrollingBackground() {
+export function PlayerBackground() {
   const playerDetails = useStore((state) => state.playerDetails)
   const yourPlayerId = useStore((state) => state.yourPlayerId)
   const players = useStore((state) => state.game.players)
@@ -23,8 +23,8 @@ export function ScrollingBackground() {
   const otherPlayers = Object.values(players).filter((player) => player.id !== yourPlayerId)
 
   const HALF_TILE = 16
-  const x = player ? -player.location.x * 32 + width / 2 - HALF_TILE : 0
-  const y = player ? -player.location.y * 32 + height / 2 : 0
+  const x = -player.location.x * 32 + width / 2 - HALF_TILE
+  const y = -player.location.y * 32 + height / 2
 
   return (
     <>

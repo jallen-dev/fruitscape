@@ -18,6 +18,10 @@ export function useInitClient() {
           useStore.getState().reset(game.gameId)
         }
         useStore.setState({ game, yourPlayerId, playerDetails: players })
+
+        if (!yourPlayerId) {
+          useStore.getState().setScreen("spectate")
+        }
       },
     })
 

@@ -2,15 +2,15 @@ import { Stage } from "@pixi/react"
 
 import { EventLog } from "../../components/EventLog"
 import { Player } from "../../components/Player"
+import { PlayerBackground } from "../../components/PlayerBackground"
 import { Recipe } from "../../components/Recipe"
-import { ScrollingBackground } from "../../components/ScrollingBackground"
 import { Trade } from "../../components/Trade"
 
 export function Game() {
   return (
     <div>
       <Stage>
-        <ScrollingBackground />
+        <PlayerBackground />
         <Player />
       </Stage>
       <Trade />
