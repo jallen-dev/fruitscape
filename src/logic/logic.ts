@@ -14,8 +14,8 @@ declare global {
 Rune.initLogic({
   minPlayers: 1,
   maxPlayers: 6,
-  setup: setup,
-  update: update,
+  setup,
+  update,
   actions: {
     setDestination: ({ playerId, path }, { game }) => {
       game.players[playerId].path = path
@@ -29,8 +29,8 @@ Rune.initLogic({
       }
       game.players[playerId].destination = { x, y }
     },
-    addFruit: addFruit,
-    tradeFruit: tradeFruit,
+    addFruit,
+    tradeFruit,
     setCharacter: ({ playerId, character }, { game }) => {
       game.players[playerId].character = character
     },

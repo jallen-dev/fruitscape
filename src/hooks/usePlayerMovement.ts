@@ -1,8 +1,7 @@
+import { MAP_HEIGHT, MAP_WIDTH } from "@/constants"
+import { playSound } from "@/playSound"
+import { useStore } from "@/store"
 import { useEffect } from "react"
-
-import { MAP_HEIGHT, MAP_WIDTH } from "../constants"
-import { playSound } from "../playSound"
-import { useStore } from "../store"
 
 export function usePlayerMovement(playerId: string) {
   useEffect(() => {

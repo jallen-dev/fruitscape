@@ -1,9 +1,8 @@
+import { load } from "@/loadAssets"
+import { useStore } from "@/store"
+import { generateObstacleMap } from "@/utils"
 import { AStarFinder } from "astar-typescript"
 import { useEffect } from "react"
-
-import { load } from "../loadAssets"
-import { useStore } from "../store"
-import { generateObstacleMap } from "../utils"
 
 export function useInitClient() {
   useEffect(() => {

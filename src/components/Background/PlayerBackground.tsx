@@ -1,12 +1,12 @@
+import { Character } from "@/components/Character"
+import { LocationMarker } from "@/components/LocationMarker"
+import { BOTTOM_BOUNDS, LEFT_BOUNDS, MAP_HEIGHT, MAP_WIDTH, RIGHT_BOUNDS, TOP_BOUNDS } from "@/constants"
+import { useStore } from "@/store"
 import { Texture } from "@pixi/core"
 import "@pixi/events"
 import { Container, Sprite, useApp } from "@pixi/react"
 
-import { BOTTOM_BOUNDS, LEFT_BOUNDS, MAP_HEIGHT, MAP_WIDTH, RIGHT_BOUNDS, TOP_BOUNDS } from "../constants"
-import { useStore } from "../store"
 import { Background } from "./Background"
-import { Character } from "./Character"
-import { LocationMarker } from "./LocationMarker"
 
 export function PlayerBackground() {
   const playerDetails = useStore((state) => state.playerDetails)

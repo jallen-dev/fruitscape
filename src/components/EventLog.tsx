@@ -1,5 +1,5 @@
-import { Event } from "../models/Event"
-import { useStore } from "../store"
+import { Event } from "@/models/Event"
+import { useStore } from "@/store"
 
 export function EventLog() {
   const events = useStore((state) => state.game.events)

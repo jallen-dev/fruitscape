@@ -1,9 +1,8 @@
+import { MAP_WIDTH } from "@/constants"
 import { PixiComponent } from "@pixi/react"
 // @ts-expect-error something about types idk
 import { CompositeTilemap } from "@pixi/tilemap"
 import { DisplayObject } from "pixi.js"
-
-import { MAP_WIDTH } from "../constants"
 
 type TileMapData = number[]
 

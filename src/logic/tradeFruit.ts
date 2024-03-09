@@ -1,6 +1,6 @@
+import { FruitType } from "@/models/Fruit"
 import { ActionContext, ContextWithGameState } from "rune-games-sdk"
 
-import { FruitType } from "../models/Fruit"
 import { GameState } from "./types"
 
 export function tradeFruit(

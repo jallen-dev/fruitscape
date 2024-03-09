@@ -1,7 +1,7 @@
-import { CharacterSelect } from "../screens/CharacterSelect/CharacterSelect"
-import { Game } from "../screens/Game/Game"
-import { HowToPlay } from "../screens/HowToPlay/HowToPlay"
-import { Spectate } from "../screens/Spectate/Spectate"
+import { CharacterSelect } from "@/screens/CharacterSelect/CharacterSelect"
+import { Game } from "@/screens/Game/Game"
+import { HowToPlay } from "@/screens/HowToPlay/HowToPlay"
+import { Spectate } from "@/screens/Spectate/Spectate"
 
 export type Screen = "characterSelect" | "howToPlay" | "game" | "spectate"
 

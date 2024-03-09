@@ -1,5 +1,5 @@
-import { useStore } from "../store"
-import { Character } from "./Character"
+import { Character } from "@/components/Character"
+import { useStore } from "@/store"
 
 export function Player() {
   const playerId = useStore((state) => state.yourPlayerId)

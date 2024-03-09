@@ -1,4 +1,4 @@
-import { FRUIT_IMAGES, FruitType } from "../models/Fruit"
+import { FRUIT_IMAGES, FruitType } from "@/models/Fruit"
 
 export function FruitQuantity({ fruitType, quantity }: { fruitType: FruitType; quantity: number }) {
   return (

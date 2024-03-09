@@ -1,6 +1,6 @@
-import { FruitType } from "../models/Fruit"
-import { useStore } from "../store"
-import { FruitQuantity } from "./FruitQuantity"
+import { FruitQuantity } from "@/components/FruitQuantity"
+import { FruitType } from "@/models/Fruit"
+import { useStore } from "@/store"
 
 const MAX_INVENTORY_SIZE = 8
 

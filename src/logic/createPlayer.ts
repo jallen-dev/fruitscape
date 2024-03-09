@@ -1,7 +1,7 @@
+import { MAP_HEIGHT, MAP_WIDTH } from "@/constants"
+import { ALL_CHARACTER_TYPES } from "@/models/Character"
 import { PlayerId } from "rune-games-sdk"
 
-import { MAP_HEIGHT, MAP_WIDTH } from "../constants"
-import { ALL_CHARACTER_TYPES } from "../models/Character"
 import { GameState } from "./types"
 
 export function createPlayer(id: PlayerId, game: GameState) {

@@ -1,7 +1,7 @@
+import { FruitType } from "@/models/Fruit"
+import { generateRecipe, setNpcsFruits } from "@/utils"
 import { ActionContext, ContextWithGameState } from "rune-games-sdk"
 
-import { FruitType } from "../models/Fruit"
-import { generateRecipe, setNpcsFruits } from "../utils"
 import { GameState } from "./types"
 
 type Params = {

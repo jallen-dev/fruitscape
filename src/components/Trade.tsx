@@ -1,8 +1,8 @@
-import { playSound } from "../playSound"
-import { useStore } from "../store"
-import { Dialog } from "./Dialog"
-import { Inventory } from "./Inventory"
-import { SwapFruit } from "./SwapFruit"
+import { Dialog } from "@/components/Dialog"
+import { Inventory } from "@/components/Inventory"
+import { SwapFruit } from "@/components/SwapFruit"
+import { playSound } from "@/playSound"
+import { useStore } from "@/store"
 
 export function Trade() {
   const playerId = useStore((state) => state.yourPlayerId)

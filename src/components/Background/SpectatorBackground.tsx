@@ -1,9 +1,9 @@
+import { Character } from "@/components/Character"
+import { MAP_HEIGHT, MAP_WIDTH } from "@/constants"
+import { useStore } from "@/store"
 import { Container, useApp } from "@pixi/react"
 
-import { MAP_HEIGHT, MAP_WIDTH } from "../constants"
-import { useStore } from "../store"
 import { Background } from "./Background"
-import { Character } from "./Character"
 
 export function Spectatorbackground() {
   const players = useStore((state) => state.game.players)

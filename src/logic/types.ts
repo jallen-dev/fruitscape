@@ -1,10 +1,9 @@
+import { CharacterType } from "@/models/Character"
+import { Event } from "@/models/Event"
+import { FruitType } from "@/models/Fruit"
+import { Npc } from "@/models/Npc"
+import { Player } from "@/models/Player"
 import { PlayerId } from "rune-games-sdk"
-
-import { CharacterType } from "../models/Character"
-import { Event } from "../models/Event"
-import { FruitType } from "../models/Fruit"
-import { Npc } from "../models/Npc"
-import { Player } from "../models/Player"
 
 export interface GameState {
   players: Record<PlayerId, Player>

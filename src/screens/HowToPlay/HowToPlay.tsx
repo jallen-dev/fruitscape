@@ -1,6 +1,7 @@
-import { SwapFruit } from "../../components/SwapFruit"
-import { FruitType } from "../../models/Fruit"
-import { useStore } from "../../store"
+import { SwapFruit } from "@/components/SwapFruit"
+import { FruitType } from "@/models/Fruit"
+import { useStore } from "@/store"
+
 import { ContributeFruit } from "./ContributeFruit"
 
 export function HowToPlay() {

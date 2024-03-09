@@ -1,5 +1,5 @@
-import { FruitQuantity } from "../../components/FruitQuantity"
-import { FruitType } from "../../models/Fruit"
+import { FruitQuantity } from "@/components/FruitQuantity"
+import { FruitType } from "@/models/Fruit"
 
 export function ContributeFruit() {
   const fruit = [FruitType.Plum, FruitType.DragonFruit, FruitType.Grapefruit, FruitType.Watermelon]

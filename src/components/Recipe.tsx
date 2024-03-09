@@ -1,11 +1,10 @@
+import { Dialog } from "@/components/Dialog"
+import { FruitQuantity } from "@/components/FruitQuantity"
+import { Inventory } from "@/components/Inventory"
+import { FRUIT_IMAGES, FruitType } from "@/models/Fruit"
+import { playSound } from "@/playSound"
+import { useStore } from "@/store"
 import { CheckIcon } from "@radix-ui/react-icons"
-
-import { FRUIT_IMAGES, FruitType } from "../models/Fruit"
-import { playSound } from "../playSound"
-import { useStore } from "../store"
-import { Dialog } from "./Dialog"
-import { FruitQuantity } from "./FruitQuantity"
-import { Inventory } from "./Inventory"
 
 export function Recipe() {
   const currentRecipe = useStore((state) => state.game.currentRecipe)

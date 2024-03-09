@@ -1,7 +1,7 @@
+import { ALL_FRUIT_TYPES } from "@/models/Fruit"
+import { generateNPCs, generateRecipe, setNpcsFruits, shuffle } from "@/utils"
 import { PlayerId } from "rune-games-sdk"
 
-import { ALL_FRUIT_TYPES } from "../models/Fruit"
-import { generateNPCs, generateRecipe, setNpcsFruits, shuffle } from "../utils"
 import { createPlayer } from "./createPlayer"
 import { GameState } from "./types"
 
